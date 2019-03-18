@@ -1,0 +1,26 @@
+.header{
+    background-color: rgb(250, 223, 114);
+    color: white;
+    background-image: url("../../assets/img/486012.jpg");
+    background-size: 100%;
+    background-blend-mode:overlay;
+}
+.text-dados{
+    color: #0C3A8E;
+}
+
+.simula{
+    background-color: #0C3A8E;
+    background-image: url("../../assets/img/323211.png");
+    background-blend-mode: overlay;
+    background-size: 100%;
+    color: white;
+}
+
+.repons{
+    background-color: white;
+    background-image: url("../../assets/img/203007.jpg");
+    background-size: 100%;
+    background-blend-mode: color-burn;
+    color: #0C3A8E;
+}

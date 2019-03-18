@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="panel panel-primary">
+      <div class="panel-headding">
+        <h1 class="text-primary text-center">CLIENTE</h1>
+        <h3 class="text-primary text-center">Login</h3>
+      </div>
+      <div class="panel-body">
+    
+        <form class="form-signin" #form="ngForm" (ngSubmit)="login(form.value)">
+          <div class="form-group">
+            <div class="alert alert-danger" *ngIf="logErro">
+                <p>Erro no username ou na password!</p>
+            </div>
+            <div class="input-group flex-nowrap">
+               <input class="form-control" type="text" #username name="username" ngModel placeholder="Email"/>
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="addon-wrapping">@</span>
+              </div>
+            </div>
+            <div class="input-group flex-nowrap">
+                <input class="form-control" [type]="typeField" #password name="password" ngModel placeholder="Password"/>
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="addon-wrapping" (click)="toogleViewPass()"><i class="fa fa-eye"></i></span>
+                  </div>
+            </div>                
+            <button class="btn btn-outline-success btn-block" type="submit">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>

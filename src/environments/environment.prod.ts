@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  ADDRESS: 'https://sisleads.gestlifes.com/sisleadsrest/'
 };
