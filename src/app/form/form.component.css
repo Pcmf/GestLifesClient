@@ -1,0 +1,65 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+.header{
+    background-image: url("../../assets/img/keyboard.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 25vh;
+}
+.form-header{
+    display: flex;
+
+}
+
+@media(min-width: 800px ){
+    .sec11{
+        border: 1px solid darkgray;
+        padding: 30px;
+    }
+}
+
+label{
+    font-size: small;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: darkslategray;
+}
+
+input, select, option{
+    font-size: small;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: navy;    
+}
+
+.alert{
+    font-size: .5em;
+    padding: 0;
+}
+
+.form-control.ng-invalid.ng-touched{
+    border: 1px solid red;
+}
+.form-control.ng-invalid.erro{
+    border: 1px solid red;
+}
+.nsp{
+    height: 0px;
+}
+
+.sp{
+        height: 300px;
+        background: red;
+        /* For Safari 3.1 to 6.0 */
+        -webkit-transition-property: width;
+        -webkit-transition-duration: 2s;
+        -webkit-transition-timing-function: linear;
+        -webkit-transition-delay: 1s;
+        /* Standard syntax */
+        transition-property: width;
+        transition-duration: 2s;
+        transition-timing-function: linear;
+        transition-delay: 1s;
+}

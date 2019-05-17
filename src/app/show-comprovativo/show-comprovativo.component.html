@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="d-flex justify-content-center">
+      <h4 class="text-center text-info">
+        {{fxNome}}
+        <span class="pull-right fa fa-times" title="Fechar" onclick="window.history.back(-1)"></span>
+      </h4>
+    </div>
+    <iframe *ngIf="imagePath" [src]="imagePath" height="800px" class="embed-responsive embed-responsive-item"></iframe>
+  
+    <div class="text-center">
+      <button class="btn btn-outline-info" onclick="window.history.back()"> Voltar</button>
+    </div>
+</div>
+

@@ -1,0 +1,23 @@
+@media (min-width: 568px) {
+    .main {
+      width: 100%;
+    }
+  }
+  @media (min-width: 992px) {
+    .main {
+      width: 970px;
+      margin: auto;
+      box-shadow: 0px 0px 14px darkgrey;
+      }
+  }
+  @media (min-width: 1200px) {
+    .main {
+      width: 1170px;
+      margin: auto;
+    }
+  }
+
+html, body {
+  height: 100%;
+}
+  

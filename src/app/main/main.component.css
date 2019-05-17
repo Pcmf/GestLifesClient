@@ -1,26 +1,54 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.modulos{
+    flex-grow:1;
+    display: flex;
+    justify-content: center;
+}
+.conteudo1{
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-basis: 460px;
+}
+.conteudo1 h4{
+    text-shadow: 1px 1px 1px #000b85;
+}
 .header{
     background-color: rgb(250, 223, 114);
-    color: white;
-    background-image: url("../../assets/img/486012.jpg");
+    color: #0C3A8E;
+    background-image: url("../../assets/img/top.png");
     background-size: 100%;
     background-blend-mode:overlay;
-}
-.text-dados{
-    color: #0C3A8E;
 }
 
 .simula{
     background-color: #0C3A8E;
-    background-image: url("../../assets/img/323211.png");
+    background-image: url("../../assets/img/323211_tr.png");
     background-blend-mode: overlay;
     background-size: 100%;
     color: white;
 }
 
 .repons{
-    background-color: white;
-    background-image: url("../../assets/img/203007.jpg");
-    background-size: 100%;
-    background-blend-mode: color-burn;
+    background-color: rgb(164, 193, 248);
+    background-image: url("../../assets/img/keyboard.png");
+    background-size: cover;
+    background-repeat: none;
+    background-blend-mode: overlay;
     color: #0C3A8E;
+    font-size: .8rem;
+}
+
+.text-dados{
+    color: #0C3A8E;
+
+}
+
+ul{
+    padding-inline-start:0;
 }

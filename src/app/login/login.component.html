@@ -1,24 +1,41 @@
-<div class="container">
+<div class="container-fluid">
+  <div class="modulo1 pt-5">
+    <h6 class="text-center">BEM VINDO</h6>
+    <h6 class="text-center">AO</h6>
+    <h6 class="text-center">PORTAL DO CLIENTE</h6>
+    <h1 class="text-center">GestLifes</h1>
+  </div>
   <div class="panel panel-primary">
-      <div class="panel-headding">
-        <h1 class="text-primary text-center">CLIENTE</h1>
+   <!--    <div class="panel-headding">
         <h3 class="text-primary text-center">Login</h3>
-      </div>
+      </div> -->
       <div class="panel-body">
     
         <form class="form-signin" #form="ngForm" (ngSubmit)="login(form.value)">
           <div class="form-group">
-            <div class="alert alert-danger" *ngIf="logErro">
-                <p>Erro no username ou na password!</p>
+            <div class="alert alert-danger small" *ngIf="logErro" (click)="logErro=false">
+                <p>Erro no Email ou na senha!
+                    <br/><small class="pull-right mt-1">Click para fechar</small>
+                </p>
             </div>
-            <div class="input-group flex-nowrap">
-               <input class="form-control" type="text" #username name="username" ngModel placeholder="Email"/>
+            <div class="alert alert-danger small" *ngIf="erroEmail" (click)="erroEmail=false">
+                <p>O email não é válido!
+                    <br/><small class="pull-right mt-1">Click para fechar</small>
+                </p>
+            </div>
+            <div class="alert alert-warning small" *ngIf="newAccess" (click)="newAccess=false">
+              <p>{{msg}}
+                <br/><small class="pull-right mt-3">Click para fechar</small>
+              </p>
+            </div>
+            <div class="input-group input-group-sm flex-nowrap">
+               <input class="form-control" [class.erroEmail]="erroEmail" type="email" #username name="username" ngModel placeholder="Email"/>
               <div class="input-group-prepend">
                 <span class="input-group-text" id="addon-wrapping">@</span>
               </div>
             </div>
-            <div class="input-group flex-nowrap">
-                <input class="form-control" [type]="typeField" #password name="password" ngModel placeholder="Password"/>
+            <div class="input-group input-group-sm flex-nowrap">
+                <input class="form-control" [class.erroPass]="erroPass" [type]="typeField" #password name="password" ngModel placeholder="Senha"/>
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="addon-wrapping" (click)="toogleViewPass()"><i class="fa fa-eye"></i></span>
                   </div>
@@ -26,6 +43,19 @@
             <button class="btn btn-outline-success btn-block" type="submit">Login</button>
           </div>
         </form>
+        
+      </div>
+      <div class="text-center text-white small mt-5">
+        <a  (click)="forgetPass()">Esqueci a senha!</a>
+      </div>
+
+      <div class="border border-white round" *ngIf="askNewAccess">
+        <div class="input-group input-group-sm">
+          <input type="text" class="form-control"  name="controlo" [(ngModel)]="controlo" placeholder="Email ou NIF" aria-label="Email ou NIF" aria-describedby="button-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-outline-primary" (click)="confirmSendPass()" type="button" id="button-addon2">Pedir</button>
+          </div>
+        </div>
       </div>
     </div>
 </div>

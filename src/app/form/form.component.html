@@ -1,0 +1,257 @@
+
+  <div class="header d-flex justify-content-end align-items-center">
+    <div class="text-header mr-5">
+      <h2 class="text-center d-none d-md-flex">Confirme os seus dados</h2>
+      <h6 class="text-center d-flex d-md-none">Confirme os seus dados</h6>
+    </div>
+  </div>
+  <div class="sec1 mt-3">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-12 m-3">
+          <p class="d-flex">Verifique os seus dados e preencha os que estiverem em falta. Obrigado! </p>
+        </div>
+      </div>
+        <form class="" #f="ngForm" (ngSubmit)="saveFormInfo(f)">
+          <div class="form-row">
+
+            <div class="col-3 col-md-2 mb-3 form-group pl-3">
+              <label>Nº Cliente</label>
+              <input type="number" class="form-control" name="id" [(ngModel)]="lead.id" readonly>
+            </div>
+
+            <div class="col-9 col-md-4 mb-3 form-group pl-3">
+              <label for="validationNome">Nome</label>
+              <input type="text" class="form-control"  [class.ng-touched]="showAlert" id="validationNome" [(ngModel)]="lead.nome" name="nome" #nome="ngModel" required>
+              <div class="alert alert-danger" *ngIf="!nome.valid && nome.touched">Necessário um nome</div>
+            </div>
+
+            <div class="col-3 col-md-1 mb-3 form-group pl-3">
+              <label for="validationIdade">Idade</label>
+              <input type="number" class="form-control" [class.ng-touched]="showAlert" id="validationIdade" name="idade" [(ngModel)]="lead.idade" min="18"
+                #idade="ngModel" required>
+                <div class="alert alert-danger" *ngIf="!idade.valid && idade.touched">Indique a sua idade.</div>
+            </div>
+
+            <div class="col-5 col-md-2 mb-3 form-group pl-3">
+              <label for="validaTelefone">Telefone</label>
+              <input type="tel" class="form-control" [class.ng-touched]="showAlert" id="validaTelefone" name="telefone" [(ngModel)]="lead.telefone" #telefone="ngModel" required minlength="9">
+              <div class="alert alert-danger" *ngIf="!telefone.valid && telefone.touched">
+                Telefone inválido
+              </div>
+            </div>
+
+            <div class="col-4 col-md-2 mb-3 form-group pl-3">
+              <label for="validaNIF">NIF</label>
+              <input type="number" class="form-control" [class.ng-touched]="showAlert" id="validaNIF" [(ngModel)]="lead.nif" name="nif" #nif="ngModel" required>
+              <div class="alert alert-danger" *ngIf="!nif.valid && nif.touched">
+                NIF inválido
+              </div>
+            </div>
+
+            <div class="col-12 col-md-4 mb-3 form-group pl-3">
+              <label for="validaEmail">Email</label>
+              <div class="input-group">
+                <input type="text" class="form-control" [class.ng-touched]="showAlert" id="validaEmail" [(ngModel)]="lead.email" name="email" #email="ngModel" required>
+                <div class="alert alert-danger" *ngIf="!email.valid && email.touched">
+                  Email não é válido
+                </div>
+              </div>
+            </div>
+
+            <div class="col-5 col-md-3 mb-3 form-group pl-3">
+              <label for="validationEstadoCivil">Estado civil</label>
+              <select class="form-control" [class.ng-touched]="showAlert" id="validationEstadoCivil" [(ngModel)]="lead.estadocivil" name="estadocivil" #estadocivil="ngModel" required>
+                <option *ngFor="let ec of estados" [ngValue]="ec.id">{{ec.nome}}</option>
+              </select>
+              <div class="alert alert-danger" *ngIf="!estadocivil.valid && estadocivil.touched">
+                Obrigatório
+              </div>
+            </div>
+
+            <div class="col-2 col-md-1 mb-3 form-group pl-3">
+              <label for="validafilhos">Filhos</label>
+              <input type="number" class="form-control" id="validafilhos" name="filhos" [(ngModel)]="lead.filhos">
+            </div>
+
+            <div class="col-5 col-md-3 mb-3 form-group pl-3">
+              <label for="validationIRS">IRS</label>
+              <select class="form-control" [class.ng-touched]="showAlert" id="validationIRS" [(ngModel)]="lead.irs" name="irs" #irs="ngModel" required>
+                <option value="Sim">Sim</option>
+                <option value="Sim junto">Sim, junto</option>
+                <option value="Sim separado">Sim, separado</option>
+                <option value="Nao">Não</option>
+              </select>
+              <div class="alert alert-danger" *ngIf="!irs.valid && irs.touched">
+                Obrigatório
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+
+            <div class="col-6 col-md-4 mb-3 form-group pl-3">
+              <label for="validationSitProf">Situação Profissional</label>
+              <select class="form-control" [class.ng-touched]="showAlert" id="validationSitProf" [(ngModel)]="lead.tipocontrato" name="tipocontrato" #tipocontrato="ngModel"
+                required>
+                <option *ngFor="let s of situacoes" [ngValue]="s.id">{{s.nome}}</option>
+              </select>
+              <div class="alert alert-danger" *ngIf="!tipocontrato.valid && tipocontrato.touched">
+                Obrigatório
+              </div>
+            </div>
+
+            <div class="col-3 col-md-2 mb-3 form-group pl-3">
+              <label for="validationVenc">Vencimento</label>
+              <input type="number" class="form-control" [class.ng-touched]="showAlert" id="validationVenc" [(ngModel)]="lead.vencimento"
+                name="vencimento" #vencimento="ngModel" required min="100">
+              <div class="alert alert-danger" *ngIf="!vencimento.valid && vencimento.touched">
+                Obrigatório
+              </div>
+            </div>
+
+            <div class="col-3 col-md-2 mb-3 form-group pl-3">
+              <label for="validationDesde">Desde</label>
+              <input type="number" class="form-control" [class.ng-touched]="showAlert" id="validationDesde" placeholder="ano" [(ngModel)]="lead.anoinicio" name="anoinicio"
+                #anoinicio="ngModel" required min="1900" max="2030">
+              <div class="alert alert-danger" *ngIf="!anoinicio.valid && anoinicio.touched">
+                Obrigatório
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="col-6 col-md-3 mb-3 form-group pl-3 ">
+              <label for="validationHab">Habitação</label>
+              <select class="form-control" [class.ng-touched]="showAlert" [(ngModel)]="lead.tipohabitacao" name="tipohabitacao" #hab="ngModel" id="validationHab" required>
+                <option *ngFor="let h of habitacoes" [ngValue]="h.id">{{h.nome}}</option>
+              </select>
+              <div class="alert alert-danger" *ngIf="!hab.valid && hab.touched">
+                Obrigatório
+              </div>
+            </div>
+
+            <div class="col-3 col-md-2 mb-3 form-group pl-3">
+              <label for="validationDesdeH">Desde</label>
+              <input type="number" class="form-control" [class.ng-touched]="showAlert" id="validationDesdeH" placeholder="ano" name="anoiniciohabitacao"
+                [(ngModel)]="lead.anoiniciohabitacao" #anohabitacao="ngModel" min="1900" max="2030" required>
+              <div class="alert alert-danger" *ngIf="!anohabitacao.valid && anohabitacao.touched">
+                Obrigatório
+              </div>
+            </div>
+
+            <div class="col-3 col-md-2 mb-3 form-group pl-3">
+              <label for="validationValor">Valor</label>
+              <input type="number" class="form-control" id="validationValor" name="valorhabitacao" [(ngModel)]="lead.valorhabitacao" 
+                  #valorhabitacao="ngModel"  [class.ng-touched]="showAlert" [required]="hab.value=='1' || hab.value=='3'">
+              <div class="alert alert-danger" *ngIf="!valorhabitacao.valid && valorhabitacao.touched">
+                Obrigatório
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+
+            <div class="col-6 col-md-2 mb-3 form-group pl-3">
+              <label for="validationOC">Outros Créditos</label>
+              <input type="number" class="form-control" id="validationOC" name="ocValor" [(ngModel)]="lead.ocValor" #ocValor="ngModel"
+                placeholder="total">
+            </div>
+
+            <div class="col-6 col-md-2 mb-3 form-group pl-3">
+              <label for="validationOR">Prestação Mensal </label>
+              <input type="number" class="form-control" id="validationOR" name="ocPrestacao" [(ngModel)]="lead.ocPrestacao" #ocPrestacao="ngModel" placeholder="total" [required]="ocValor.value > 0">
+              <div class="alert alert-danger" *ngIf="!ocPrestacao.valid && ocPrestacao.touched && ocValor.valid">
+                Obrigatório
+              </div>
+            </div>
+
+          </div>
+          <!-- Checkbox do Segundo proponente -->
+          <div class="form-row">
+          <div class="form-group pl-3">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" #prop="ngModel" name="segundoproponente" [(ngModel)]="lead.segundoproponente" [checked]="lead.segundoproponente"
+                (change)="clear2Prop(prop.value)" id="segundoProp">
+              <label class="form-check-label" for="segundoProp">
+                Pretendo incluir um segundo titular
+              </label>
+            </div>
+          </div>
+        </div>
+
+          <!-- Formulario  Segundo proponente -->
+          <div class="form-row" *ngIf="lead.segundoproponente">
+            <div class="col-xs-12 col-md-4 mb-3 form-group pl-3">
+              <label for="validationNome2">Nome</label>
+              <input type="text" class="form-control" [class.ng-touched]="showAlert" id="validationNome2"  name="nome2" [(ngModel)]="lead.nome2" #nome2="ngModel" [required]="prop">
+              <div class="alert alert-danger" *ngIf="!nome2.valid && nome2.touched">
+                Obrigatório
+              </div>
+            </div>
+            <div class="col-3 col-md-1 mb-3 form-group pl-3">
+              <label for="validationIdade2">Idade</label>
+              <input type="number" class="form-control" [class.ng-touched]="showAlert" id="validationIdade2" name="idade2" [(ngModel)]="lead.idade2" #idade2="ngModel" [required]="prop">
+              <div class="alert alert-danger" *ngIf="!idade2.valid && idade2.touched">
+                Obrigatório
+              </div>
+            </div>
+            <div class="col-5 col-md-2 mb-3 form-group pl-3">
+              <label for="validaTelefone2">Telefone</label>
+              <input type="tel" class="form-control" id="validaTelefone2" [class.ng-touched]="showAlert" name="telefone2" [(ngModel)]="lead.telefone2" #telefone2="ngModel" [required]="prop" minlength="9">
+              <div class="alert alert-danger" *ngIf="!telefone2.valid && telefone2.touched">
+                Obrigatório
+              </div>
+            </div>
+            <div class="col-4 col-md-2 mb-3 form-group pl-3">
+              <label for="validaNIF2">NIF</label>
+              <input type="tel" class="form-control" [class.ng-touched]="showAlert" id="validaNIF2" name="nif2" [(ngModel)]="lead.nif2" #nif2="ngModel"
+                [required]="prop" minlength="9">
+              <div class="alert alert-danger" *ngIf="!nif2.valid && nif2.touched">
+                Obrigatório
+              </div>
+            </div>
+            <div class="col-12 col-md-4 mb-3 form-group pl-3">
+              <label for="validationRelacao">Relação com Proponente</label>
+              <select class="form-control" [class.ng-touched]="showAlert" name="relacaofamiliar" [(ngModel)]="lead.relacaofamiliar" #relacaofamiliar="ngModel" id="validationRelacao"
+                [required]="prop">
+                <option *ngFor="let r of relacoes" [ngValue]="r.id">{{r.descricao}}</option>
+              </select>
+              <div class="alert alert-danger" *ngIf="!relacaofamiliar.valid && relacaofamiliar.touched">
+                Obrigatório
+              </div>
+            </div>
+            <div class="col-6 col-md-4 mb-3 form-group pl-3">
+              <label for="validationProfissao2">Situação Profissional</label>
+              <select class="form-control"  [class.ng-touched]="showAlert" [(ngModel)]="lead.tipocontrato2" name="tipocontrato2" #tipocontrato2="ngModel" id="validationProfissao2" [required]="prop">
+                <option *ngFor="let s of situacoes" [ngValue]="s.id">{{s.nome}}</option>
+              </select>
+              <div class="alert alert-danger" *ngIf="!tipocontrato2.valid && tipocontrato2.touched">
+                Obrigatório
+              </div>
+            </div>
+            <div class="col-3 col-md-1 mb-3 form-group pl-3">
+              <label for="validationVenc2">Vencimento</label>
+              <input type="number" class="form-control"  [class.ng-touched]="showAlert" id="validationVenc2" name="vencimento2" [(ngModel)]="lead.vencimento2" #vencimento2="ngModel" [required]="prop">
+              <div class="alert alert-danger" *ngIf="!vencimento2.valid && vencimento2.touched">
+                Obrigatório
+              </div>
+            </div>
+            <div class="col-3 col-md-1 mb-3 form-group pl-3">
+              <label for="validationDesde2">Desde</label>
+              <input type="number" class="form-control" [class.ng-touched]="showAlert" id="validationDesde2" name="anoinicio2" [(ngModel)]="lead.anoinicio2" #anoinicio2="ngModel" placeholder="ano" [required]="prop">
+              <div class="alert alert-danger" *ngIf="!anoinicio2.valid && anoinicio2.touched">
+                Obrigatório
+              </div>
+            </div>
+          </div>
+          
+          <button class="btn btn-outline-primary btn-block" type="submit" [class.btn-outline-danger]="!f.valid">Continuar</button>
+          <div class="alert alert-danger" *ngIf="!f.valid">
+            Por favor preencha todos os campos obrigatorios antes de continuar!
+          </div>
+        </form>
+
+    </div>
+  </div>

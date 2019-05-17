@@ -1,0 +1,46 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+.header{
+    background-image: url("../../assets/img/7452-unsplash.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 25vh;
+    color: yellow;
+    text-shadow: 1px 1px 1px;
+}
+
+label{
+    font-size: small;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: darkslategray;
+}
+
+input, select, option{
+    font-size: small;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: navy;    
+}
+
+.infoTipoCredito {
+    font-size: small;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color:  darkslategray;     
+}
+
+.alert{
+    font-size: .5em;
+    padding: 0;
+}
+
+.form-control.ng-invalid.ng-touched{
+    border: 1px solid red;
+}
+.card{
+    box-shadow: 1px 1px 2px darkgray;
+    /* background-color: #fdfdfd; */
+    
+}

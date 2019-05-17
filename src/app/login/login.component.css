@@ -1,5 +1,35 @@
+.container-fluid{
+    background-color: rgb(61, 106, 189);
+    background-image: url("../../assets/img/login.jpg");
+    background-repeat: no-repeat;
+    background-blend-mode: overlay;
+
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    color: white;
+}
+
+.modulo1{
+    color: white; 
+}
 .panel{
     width: 300px;
     margin: auto;
     margin-top: 20%;
+}
+
+a{
+    color: white;
+}
+
+.erroEmail{
+    border: 2px solid red;
+}
+.erroPass{
+    border: 2px solid red;
+}
+
+h1, h6{
+    text-shadow: 1px 1px steelblue;
 }

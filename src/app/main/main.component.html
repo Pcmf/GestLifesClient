@@ -1,36 +1,78 @@
-  <div class="header pb-5">
-    <h3 class="text-center pt-3">DADOS DO SEU PROCESSO</h3>
-    <p>&nbsp;</p>
-    <div class="ml-3">
-      <h6 class="text-dados">Numero: <strong>{{dados.lead}}</strong></h6>
-      <h6 class="text-dados">Situação: <strong>{{dados.status}}</strong>
-        <small class="pull-right pr-3" *ngIf="dados.sts==8"><a class="">Anexar</a></small>
-      </h6>
-      <h6 class="text-dados">Data da Situação: <strong>{{dados.datastatus}}</strong></h6>
-    </div>
+<div class="main">
 
+  <div class="header modulos p-3">
+    <div class="conteudo1">
+        <h4 class="text-center">DADOS DO SEU PROCESSO</h4>
+        <!-- <h6 class="text-dados">Nome: <strong>{{dados.nome}}</strong></h6> -->
+        <h6 class="text-dados">Numero: <strong>{{dados.lead}}</strong></h6>
+        <h6 class="text-dados">Situação: 
+          <strong *ngIf="dados.sts!=19 && dados.sts!=25 && dados.sts!=23 && dados.sts!=24 && dados.sts!=31">{{dados.status}}</strong>
+          <strong *ngIf="dados.sts==19 || dados.sts==25 || dados.sts==31">Recusado</strong>
+          <strong *ngIf="dados.sts==23">Aguarda Comprovativo de Pagamento</strong>
+          <strong *ngIf="dados.sts==24">Financiado</strong>
+          <small class="pull-right" *ngIf="dados.sts==8 || dados.sts==21"><a routerLink="/docs"
+              class="btn btn-default btn-sm"><span class="badge badge-pill badge-warning">Anexar</span></a></small>
+        </h6>
+        <p *ngIf="dados.sts==4 || dados.sts==5 || dados.sts==14 || dados.sts==15" class="border border-info rounded-lg p-1 small">{{dados.motivo}}<br/>{{dados.outro}} </p>
+        <p *ngIf="dados.sts==19 || dados.sts==25 || dados.sts==31" class="border border-info rounded-lg p-1 small">{{dados.motivo}}<br/>{{dados.outro}} </p>
+        <p *ngIf="credito.dtcontratocliente && dados.sts==16" class="border border-info rounded-lg p-1">
+            <small *ngIf="!credito.dtcontratoparceiro && credito.dtcontratocliente">O contrato foi-lhe enviado por {{credito.formaenvio}} em {{credito.dtcontratocliente}} </small>
+            <small *ngIf="credito.dtcontratoparceiro">Contrato enviado para o parceiro em {{credito.dtcontratocliente}} </small>
+        </p>
+        <p *ngIf="dados.sts==23" class="border border-info rounded-lg p-1 small"><a routerLink="/comp">Ver comprovativos necessários</a></p>
+        <h6 class="text-dados">Data da Situação: <strong>{{dados.datastatus}}</strong></h6>
+    </div>
   </div>
-  <div class="simula p-3">
+
+
+  <div class="simula modulos p-3">
+    <div class="conteudo1" *ngIf="dados.sts!=16 && dados.sts!=17 && dados.sts!=23 && dados.sts!=24">
       <h4 class="text-center">
         SIMULAÇÃO DO CRÉDITO
       </h4>
 
       <h6 class="text-center">
-          <strong *ngIf="dados.tipocredito==='CP'" >Crédito Pessoal</strong>
-          <strong *ngIf="dados.tipocredito==='CC'" >Crédito Consolidado</strong>
-          <strong *ngIf="dados.tipocredito==='AU'" >Crédito Automovél</strong>
+        <strong *ngIf="dados.tipocredito==='CP'">Crédito Pessoal</strong>
+        <strong *ngIf="dados.tipocredito==='CC'">Crédito Consolidado</strong>
+        <strong *ngIf="dados.tipocredito==='AU'">Crédito Automovél</strong>
       </h6>
-      <ul class="pt-1">
-        <li class="pl-3">Valor pretendido: <strong class="pull-right pr-5">{{dados.valorpretendido | currency:'€'}}</strong></li>
-        <li class="pl-3">Prazo: <strong class="pull-right pr-5">{{dados.prazopretendido}} dias</strong></li>
-        <li class="pl-3">Prestação: <strong class="pull-right pr-5">{{dados.prestacaopretendida}} €/Mês</strong></li>
+
+      <ul class="pt-1" style="list-style: none">
+        <li class="">Valor pretendido: <strong class="pull-right">{{dados.valorpretendido | currency:'€'}}</strong></li>
+        <li>Prazo: <strong class="pull-right">{{dados.prazopretendido}} Meses</strong></li>
+        <li>Prestação: <strong class="pull-right">{{dados.prestacaopretendida}} €/Mês</strong></li>
       </ul>
-  </div>
-  <div class="repons p-3 text-dados">
-    <h5 class="text-center">RESPONSAVEIS PELO PROCESSO</h5>
-    <h6>Gestor: <strong>{{dados.gestor}} | <span class="fa fa-phone"> {{dados.telefonegestor}}</span> | <span> @email</span></strong></h6>
-    <h6>Analista: <strong *ngIf="!analista">não atribuido</strong></h6>
+    </div>
+  <!--AProvado ou Financiado-->
+    <div class="conteudo1" *ngIf="dados.sts==16 || dados.sts==17 || dados.sts==23 || dados.sts==24">
+      <h4 class="text-center">
+        DADOS DO CRÉDITO
+      </h4>
 
-    <p><small>Poderá entrar em contacto com a Gestlifes através do nosso numero geral: (+351) 222 333 444 no horario 9:30h ás 19:00h.</small></p>
+      <h6 class="text-center">
+        <strong *ngIf="credito.tipocredito==='CP'">Crédito Pessoal</strong>
+        <strong *ngIf="credito.tipocredito==='CC'">Crédito Consolidado</strong>
+        <strong *ngIf="credito.tipocredito==='AU'">Crédito Automovél</strong>
+      </h6>
 
+      <ul class="pt-1" style="list-style: none">
+        <li class="">Valor : <strong class="pull-right">{{credito.montante | currency:'€'}}</strong></li>
+        <li>Prazo: <strong class="pull-right">{{credito.prazo}} Meses</strong></li>
+        <li>Prestação: <strong class="pull-right">{{credito.prestacao}} €/Mês</strong></li>
+      </ul>
+    </div>
   </div>
+
+  <div class="repons modulos p-3 text-dados">
+    <div class="conteudo1">
+      <h4 class="text-center">RESPONSAVEIS PELO PROCESSO</h4>
+      <h6>Gestor: <strong>{{dados.gestor}} | <span class="fa fa-phone"><span
+              class="phone"> {{dados.telefonegestor}}</span> </span></strong></h6>
+      <h6><strong> {{dados.emailgestor}}</strong></h6>
+      <h6>Analista: <strong *ngIf="!dados.analista">não atribuido</strong> <strong *ngIf="dados.analista">{{dados.nomeanalista}}</strong></h6>
+
+      <p class="pt-5"><span style="color: black; font-size: small">Poderá entrar em contacto com a Gestlifes através do nosso numero geral:<span class="phone"> (+351) 220
+            931 950</span> no horario 9:30h ás 18:30h.</span></p>
+    </div>
+  </div>
+</div>

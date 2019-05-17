@@ -1,0 +1,197 @@
+<div class="header p-5 mb-3">
+  <h2 class="d-none d-md-flex justify-content-center">Crédito Pretendido</h2>
+  <h6 class="d-flex d-md-none justify-content-center">Crédito Pretendido</h6>
+</div>
+<div class="container">
+  <div class="sec1">
+    <!--Informações sobre o crédito pretendido -->
+    <div class="row">
+      <div class="col-12 col-md-4 mt-3">
+        <div class="card" style="width: 20rem; margin: auto; font-size: small">
+          <div class="card-body">
+            <h5 class="card-title">Informação</h5>
+            <p class="card-text">Indique os valores pretendidos e o prazo e/ou o valor da prestação. (Minimo 1000€, 12
+              meses)</p>
+            <p class="card-text">Para <strong>valores superiores a 2500€</strong> pode usar o simulador abaixo.</p>
+          </div>
+        </div>
+        <div class="d-none d-md-flex mt-3">
+          <iframe *ngIf="tpc=='CC'" src="https://sims.cetelem.pt/sims/gestlifes-ext.html"
+            style="width:364px; height:354px;" scrolling="no">
+          </iframe>
+          <iframe *ngIf="tpc=='CP' || tpc=='AU'" src="https://sims.cetelem.pt/sims/gestlifes-epf.html"
+            style="width:368px; height:354px; margin: auto" scrolling="no">
+          </iframe>
+        </div>
+      </div>
+      <div class="col-12 col-md-8 mt-3 border pl-5 pr-5">
+        <h5 class="d-none d-md-flex justify-content-center">Dados do Crédito Pretendido</h5>
+        <form class="form" #f="ngForm" (ngSubmit)="saveCredito(f)">
+          <div class="form-row">
+            <div class="form-group col-6 col-md-2">
+              <label for="inputTipocredito">Tipo Crédito <small>*</small></label>
+              <div class="input-group">
+                <select class="form-control" [class.ng-touched]="showAlert" id="inputTipocredito" #tipocredito="ngModel"
+                  name="tipocredito" [(ngModel)]="form2.tipocredito" (change)="selectTipoCredito(tipocredito.value)"
+                  required>
+                  <option selected value="CP">Pessoal</option>
+                  <option value="CC">Consolidado</option>
+                  <option value="AU">Automovel</option>
+                </select>
+              </div>
+              <div class="alert alert-danger" *ngIf="!tipocredito.valid && tipocredito.touched">
+                Obrigatório
+              </div>
+            </div>
+            <div class="form-group col-6 col-md-2">
+              <label for="inputOC">Valor <small>*</small></label>
+              <input type="number" class="form-control" [class.ng-touched]="showAlert" id="inputValorPretendido"
+                name="valorpretendido" [(ngModel)]="form2.valorpretendido" #valor="ngModel" required>
+              <div class="alert alert-danger" *ngIf="!tipocredito.valid && tipocredito.touched">
+                Obrigatório
+              </div>
+            </div>
+
+            <div class="form-group col-6 col-md-2">
+              <label for="inputOC">Prazo <small>**</small></label>
+              <input type="number" class="form-control" [class.ng-touched]="showAlert" id="inputValorPretendido"
+                name="prazopretendido" [(ngModel)]="form2.prazopretendido" #prazo="ngModel"
+                [required]="!prestacao.value" autofocus>
+              <div class="alert alert-danger" *ngIf="!prazo.valid && tipocredito.touched && !prestacao.valid">
+                Obrigatório
+              </div>
+            </div>
+
+
+            <div class="form-group col-6 col-md-2">
+              <label for="inputOC">Prestação <small>**</small></label>
+              <input type="number" class="form-control" [class.ng-touched]="showAlert" id="inputValorPretendido"
+                name="prestacaopretendida" #prestacao="ngModel" [(ngModel)]="form2.prestacaopretendida"
+                [required]="!prazo.valid">
+              <div class="alert alert-danger" *ngIf="!prazo.valid && tipocredito.touched && !prestacao.valid">
+                Obrigatório
+              </div>
+            </div>
+
+            <div class=" form-group col-12">
+              <label for="inputFinalidade">Finalidade</label>
+              <input type="text" class="form-control" id="inputFinalidade" name="finalidade"
+                [(ngModel)]="form2.finalidade">
+            </div>
+
+            <div class=" form-group col-12">
+              <label for="inputOutraInfo">Observações</label>
+              <textarea class="form-control" rows="2" id="inputOutraInfo" name="outrainfo"
+                [(ngModel)]="form2.outrainfo"></textarea>
+            </div>
+
+            <button class="btn btn-outline-primary btn-block mt-3 center" [class.btn-outline-danger]="!f.valid"
+              type="submit">Seguinte</button>
+            <div class="alert alert-danger" *ngIf="!f.valid">
+              Por favor preencha todos os campos obrigatorios antes de continuar!
+            </div>
+            <div class="alert alert-danger" *ngIf="!(prazo.value || prestacao.value) && f.valid">
+              Por favor preencha o prazo ou a prestação pretendida!
+            </div>
+
+            <div class="small col-12 mt-3">
+              <p class="col-12">Os valores do formulário são meramente informativos e servem apenas para indicar os valores e as carateristicas do crédito pretendido.</p>
+              <p class="col-12">* Campos de preenchimento  obrigatório
+                <br/>** É obrigatório o preenchimento de pelo menos um destes campos.
+              </p> 
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="d-flex d-md-none col-12 col-md-4 mt-5">
+        <iframe *ngIf="tpc=='CC'" src="https://sims.cetelem.pt/sims/gestlifes-ext.html"
+          style="width:364px; height:354px;" scrolling="no">
+        </iframe>
+        <iframe *ngIf="tpc=='CP' || tpc=='AU'" src="https://sims.cetelem.pt/sims/gestlifes-epf.html"
+          style="width:364px; height:354px; margin: auto" scrolling="no">
+        </iframe>
+      </div>
+
+      <div class="col-md-1">&nbsp;</div>
+      <div class="col-12 col-md-10 mt-3 infoTipoCredito">
+        <hr />
+        <h5 class="text-center text-info">Informações sobre tipos de Crédito</h5>
+        <div class="accordion" id="infoTipoCredito">
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h2 class="mb-0">
+                <button class="btn btn-block" type="button" data-toggle="collapse" data-target="#collapseOne"
+                  aria-expanded="true" aria-controls="collapseOne">
+                  Crédito Consolidado
+                </button>
+              </h2>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#infoTipoCredito">
+              <div class="card-body">
+                <p>Tem-se observado um grande aumento na procura do crédito consolidado. Tal como o próprio nome
+                  indica, este crédito permite
+                  consolidar o pagamento de todos os seus empréstimos numa só prestação mensal.</p>
+                <p>A grande vantagem?</p>
+                <p>Com esta renegociação de créditos consegue reduzir, consideravalmente, o valor de todas as suas
+                  mensalidades –
+                  uma ótima solução para poupar dinheiro.</p>
+                <ul>
+                  <li>Uma única mensalidade</li>
+                  <li>Taxa fixa</li>
+                  <li>Poupe até 50% em todas as suas prestações.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingTwo">
+              <h2 class="mb-0">
+                <button class="btn btn-block collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo"
+                  aria-expanded="false" aria-controls="collapseTwo">
+                  Crédito Pessoal
+                </button>
+              </h2>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#infoTipoCredito">
+              <div class="card-body">
+                <p>Um dos tipos de créditos mais comuns, muito requisitado pelas suas vantagens: rapidez, simplicidade
+                  e flexibilidade.</p>
+                <p>Graças às diversas soluções de financiamento presentes no mercado, é possível encontrar o negócio
+                  mais adequado ao seu objetivo.
+                  Apoiado por uma decisão ponderada, um crédito pode ser a ferramenta ideal para lhe trazer
+                  tranquilidade e bem-estar.</p>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingThree">
+              <h2 class="mb-0">
+                <button class="btn btn-block collapsed" type="button" data-toggle="collapse"
+                  data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  Crédito Automovél
+                </button>
+              </h2>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#infoTipoCredito">
+              <div class="card-body">
+                <p> Está a pensar em trocar de carro? Comprar um carro usado? Talvez quer dar o salto para o carro dos
+                  seus sonhos?</p>
+                <p>Hoje em dia não faz sentido limitar-se por não conseguir pagar um automóvel a pronto.</p>
+                <p>São várias as alternativas de crédito automóvel que o ajudam a ir de encontro a estes objetivos.
+                  Conheça as alternativas que lhe
+                  trazem vantagens únicas como:</p>
+                <ul>
+                  <li>Taxas baixas e fixas;</li>
+                  <li>Reembolsos adequados ao seu orçamento;</li>
+                  <li>Chave na mão!</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

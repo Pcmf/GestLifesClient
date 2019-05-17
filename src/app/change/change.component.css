@@ -1,0 +1,19 @@
+.container{
+    background-color: rgb(61, 106, 189);
+    background-image: url("../../assets/img/login.jpg");
+    background-repeat: no-repeat;
+    background-blend-mode: overlay;
+
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+h1, h5, label{
+    text-shadow: 1px 1px steelblue;
+}

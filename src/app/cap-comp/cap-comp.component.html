@@ -1,0 +1,43 @@
+<div class="container">
+    <h6 class="text-uppercase">Anexar: <span class="text-info"> {{docPedido.instituicao}} - {{docPedido.tipo}}</span></h6>
+    <p class="small">Para anexar o comprovativo pedido pode selecionar um ficheiro PDF que tenha numa pasta do seu dispositivo ou usar a camara.</p>
+  
+    <!-- Usar Camera-->
+    <button *ngIf="!file && !camera" class="btn btn-outline-primary" (click)="useCamera()"><i class="fa fa-camera" aria-hidden="true"></i> Usar Camera</button>
+  
+    <!--Input File-->
+    <input *ngIf="!camera" name="docToUpload" type="file" accept="pdf/*" ngModel (change)="handleInputChange($event, docSelected )" (click)="selectFile()"/>
+  
+    <button class="btn btn-outline-warning" onclick="window.history.back()"> Voltar</button>
+  
+    <div class="sec1" *ngIf="file">
+        <div class="alert alert-danger" *ngIf="erro"><small>{{erro}}</small></div>
+      <div class="">
+        <button type="button" class="btn btn-warning" (click)="cancelar()">Cancelar</button>
+        <button type="button" class="btn btn-primary" [disabled]="erro || !loaded" (click)="confirmaAnexar()">Confirmar</button>
+      </div>
+    </div>
+  
+    <div class="sec2" *ngIf="!webcamImage && camera">
+  
+          <button class="btn btn-outline-primary btn-block" (click)="triggerSnapshot();"><i class="fa fa-camera" aria-hidden="true"></i> Tirar Foto</button>
+
+          <webcam *ngIf="showWebcam"
+            [height]="600" [width]="400" 
+            [trigger]="triggerObservable" 
+            (imageCapture)="handleImage($event)"
+            [videoOptions]="videoOptions" [imageQuality]="1" 
+            (initError)="handleInitError($event)">
+          </webcam>
+    </div>
+    
+    <div class="snapshot" *ngIf="webcamImage && camera">
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-outline-success" (click)="confirmaAnexarFoto()"><i class="fa fa-check" aria-hidden="true"></i> Aceitar</button>
+        <button class="btn btn-outline-info" (click)="tentarNovamente()"><i class="fa fa-camera" aria-hidden="true"></i> Novamente</button>
+        <button class="btn btn-outline-warning" (click)="cancelar()"><i class="fa fa-times" aria-hidden="true"></i> Cancelar</button>
+      </div>
+        <img [src]="webcamImage.imageAsDataUrl" />
+    </div>
+  </div>
+  

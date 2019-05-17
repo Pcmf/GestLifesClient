@@ -55,6 +55,7 @@ export class DataService {
 
   logout() {
     sessionStorage.removeItem('token');
+    window.location.reload();
   }
 
   isLoggedIn() {
@@ -88,9 +89,18 @@ export class DataService {
     return helper.decodeToken(sessionStorage.getItem('token')).id;
   }
 
-  getLead () {
+  getLead (): number {
     const helper = new JwtHelperService;
     return helper.decodeToken(sessionStorage.getItem('token')).lead;
+  }
+
+  getLoginLeadStatus() {
+     const helper = new JwtHelperService;
+    return helper.decodeToken(sessionStorage.getItem('token')).sts;
+  }
+
+  getLeadSts () {
+    return this.getData('lead/' + this.getLead());
   }
 
   getName () {

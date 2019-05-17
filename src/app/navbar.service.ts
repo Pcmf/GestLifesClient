@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class NavbarService {
-  nome: string;
+  nome = '';
   constructor() { }
 
   private navState = new Subject();

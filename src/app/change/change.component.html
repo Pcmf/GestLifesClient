@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="header">
+    <h1 class="text-center">Gestlifes</h1>
+    <h5>Alterar Senha de Acesso</h5>
+  </div>
+  <div class="section">
+    <form>
+      <div class="form-group">
+
+        <small>*Minimo de 4 carateres</small>
+        <div class="input-group input-group-sm flex-nowrap">
+          <input class="form-control" required minlength="4" maxlength="10"  [type]="typeField" #password="ngModel" name="password" ngModel
+            placeholder="Nova senha" />
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="addon-wrapping" (click)="toogleViewPass()"><i
+                class="fa fa-eye"></i></span>
+          </div>
+        </div>
+        
+        <button [disabled]="!password.valid" class="btn btn-outline-success btn-block" type="button" (click)="changePass(password.value)">Submeter</button>
+      </div>
+
+    </form>
+
+  </div>
+</div>
