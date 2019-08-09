@@ -25,6 +25,8 @@ import { IntroComponent } from './intro/intro.component';
 import { FormComponent } from './form/form.component';
 import { Form2Component } from './form2/form2.component';
 import { FooterComponent } from './footer/footer.component';
+import { CreditCardComponent } from './credit-card/credit-card.component';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { FooterComponent } from './footer/footer.component';
     FormComponent,
     Form2Component,
     FooterComponent,
+    CreditCardComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +65,7 @@ import { FooterComponent } from './footer/footer.component';
       {path: 'show' , component: ShowDocComponent, canActivate: [AuthGuardService] },
       {path: 'capture' , component: CaptureComponent, canActivate: [AuthGuardService] },
       {path: 'docs' , component: DocsComponent, canActivate: [AuthGuardService]},
+      {path: 'cc' , component: CreditCardComponent, canActivate: [AuthGuardService]},
       {path: 'comp' , component: ComprovativosComponent, canActivate: [AuthGuardService]},
       {path: 'capcomp' , component: CapCompComponent, canActivate: [AuthGuardService] },
       {path: 'showcomp' , component: ShowComprovativoComponent, canActivate: [AuthGuardService]},

@@ -15,6 +15,7 @@ export class ShowDocComponent implements OnInit {
   private linha: number;
   public fxNome: string;
   public imagePath: Url = null;
+
   constructor(private route: ActivatedRoute, private dataService: DataService, private _sanitizer: DomSanitizer ) {
     this.route.queryParamMap.subscribe(
       params => {
@@ -24,7 +25,11 @@ export class ShowDocComponent implements OnInit {
           (resp: any) => {
             const document = resp.json()[0];
             this.fxNome = document.nomedoc;
-            this.imagePath = this._sanitizer.bypassSecurityTrustResourceUrl('data:application/pdf;base64,' + document.fx64);
+            if (document.tipo === 'pdf') {
+              this.imagePath = this._sanitizer.bypassSecurityTrustResourceUrl('data:application/pdf;base64,' + document.fx64);
+            } else {
+              this.imagePath = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + document.fx64);
+            }
           }
         );
       }

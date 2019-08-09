@@ -33,7 +33,7 @@
               <div class="input-group">
                 <select class="form-control" [class.ng-touched]="showAlert" id="inputTipocredito" #tipocredito="ngModel"
                   name="tipocredito" [(ngModel)]="form2.tipocredito" (change)="selectTipoCredito(tipocredito.value)"
-                  required>
+                  required [disabled] = "readOnly" autofocus>
                   <option selected value="CP">Pessoal</option>
                   <option value="CC">Consolidado</option>
                   <option value="AU">Automovel</option>
@@ -46,7 +46,7 @@
             <div class="form-group col-6 col-md-2">
               <label for="inputOC">Valor <small>*</small></label>
               <input type="number" class="form-control" [class.ng-touched]="showAlert" id="inputValorPretendido"
-                name="valorpretendido" [(ngModel)]="form2.valorpretendido" #valor="ngModel" required>
+                name="valorpretendido" [(ngModel)]="form2.valorpretendido" #valor="ngModel" required [readonly]="readOnly" autofocus>
               <div class="alert alert-danger" *ngIf="!tipocredito.valid && tipocredito.touched">
                 Obrigatório
               </div>
@@ -56,7 +56,7 @@
               <label for="inputOC">Prazo <small>**</small></label>
               <input type="number" class="form-control" [class.ng-touched]="showAlert" id="inputValorPretendido"
                 name="prazopretendido" [(ngModel)]="form2.prazopretendido" #prazo="ngModel"
-                [required]="!prestacao.value" autofocus>
+                [required]="!prestacao.value" [readonly]="readOnly">
               <div class="alert alert-danger" *ngIf="!prazo.valid && tipocredito.touched && !prestacao.valid">
                 Obrigatório
               </div>
@@ -67,7 +67,7 @@
               <label for="inputOC">Prestação <small>**</small></label>
               <input type="number" class="form-control" [class.ng-touched]="showAlert" id="inputValorPretendido"
                 name="prestacaopretendida" #prestacao="ngModel" [(ngModel)]="form2.prestacaopretendida"
-                [required]="!prazo.valid">
+                [required]="!prazo.valid"  [readonly]="readOnly">
               <div class="alert alert-danger" *ngIf="!prazo.valid && tipocredito.touched && !prestacao.valid">
                 Obrigatório
               </div>
@@ -76,13 +76,13 @@
             <div class=" form-group col-12">
               <label for="inputFinalidade">Finalidade</label>
               <input type="text" class="form-control" id="inputFinalidade" name="finalidade"
-                [(ngModel)]="form2.finalidade">
+                [(ngModel)]="form2.finalidade" [readonly]="readOnly">
             </div>
 
             <div class=" form-group col-12">
               <label for="inputOutraInfo">Observações</label>
               <textarea class="form-control" rows="2" id="inputOutraInfo" name="outrainfo"
-                [(ngModel)]="form2.outrainfo"></textarea>
+                [(ngModel)]="form2.outrainfo" [readonly]="readOnly"></textarea>
             </div>
 
             <button class="btn btn-outline-primary btn-block mt-3 center" [class.btn-outline-danger]="!f.valid"

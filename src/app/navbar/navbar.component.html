@@ -1,33 +1,45 @@
 <nav *ngIf="isLoggedIn()" class="navbar navbar-expand-lg navbar-inner">
-  <a class="navbar-brand" [routerLink]="redirectTo()" routerLinkActive="active current">
-    <img src='./assets/img/logo_email_sm.png' style="height: 35px" alt="Gestlifes"/>
+  <a class="navbar-brand" (click)="redirectTo()">
+    <img src='./assets/img/logo_email_sm.png' style="height: 35px" alt="Gestlifes" />
   </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon text-center" style="font-size:xx-small;color:black; text-decoration: none">MENU </span> 
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon text-center pr-5" style="color: darkblue; font-weight: 600">
+      <span class="fa fa-bars fa-2x"></span>
+    </span>
   </button>
+
   <div class="collapse navbar-collapse mt-3" id="navbarNav">
-      <ul class="navbar-nav mr-auto" *ngIf="isLoggedIn()">
-        <!-- <ul class="navbar-nav mr-auto" *ngIf="isLoggedIn() && redirectTo()=='/'"> -->
+    <ul class="navbar-nav mr-auto" *ngIf="isLoggedIn()">
       <li class="nav-item active">
-          <a *ngIf="status < 10 || status==36 || status==37" class="nav-link small text-uppercase" routerLink="/form" routerLinkActive="active current"><i class="fa fa-briefcase" aria-hidden="true"></i> Processo</a>
-          <a *ngIf="status >= 10 && status!=36 && status!=37" class="nav-link small text-uppercase" routerLink="/" routerLinkActive="active current"><i class="fa fa-briefcase" aria-hidden="true"></i> Processo</a>
+        <a class="nav-link small text-uppercase" routerLink="/form" routerLinkActive="active current"><i
+            class="fa fa-briefcase" aria-hidden="true"></i> Processo</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link small text-uppercase" routerLink="/docs" routerLinkActive="active current"><i class="fa fa-file" aria-hidden="true"></i> Documentação</a>
+        <a class="nav-link small text-uppercase" routerLink="/docs" routerLinkActive="active current"><i
+            class="fa fa-file" aria-hidden="true"></i> Documentação</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link small text-uppercase" routerLink="/faq" routerLinkActive="active current"><i class="fa fa-question" aria-hidden="true"></i> FAQs</a>
-      </li> 
+        <a class="nav-link small text-uppercase" routerLink="/cc" routerLinkActive="active current"><i class="fa fa-cc"
+            aria-hidden="true"></i> Cartão de Crédito</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link small text-uppercase" routerLink="/faq" routerLinkActive="active current"><i
+            class="fa fa-question" aria-hidden="true"></i> FAQs</a>
+      </li>
     </ul>
     <ul class="navbar-nav">
       <li class="nav-item small text-uppercase" routerLinkActive="active">
-       <a *ngIf="isLoggedIn()" class="nav-link" routerLink="/change" title="Click para alterar dados de acesso">
-           <i class="fa fa-user"></i> {{loginName}}</a>     
+        <a *ngIf="isLoggedIn()" class="nav-link" routerLink="/change" title="Click para alterar a senha de acesso">
+          <i class="fa fa-user"></i> {{loginName}}
+        </a>
       </li>
-     <li class="nav-item">
-        <a *ngIf="isLoggedIn()" class="nav-link  small text-uppercase" (click)="logout()" routerLink="/login" title="Click para sair">
+      <li class="nav-item">
+        <a *ngIf="isLoggedIn()" class="nav-link  small text-uppercase" (click)="logout()" routerLink="/login"
+          title="Click para sair">
           <i class="fa fa-sign-out"></i>Sair</a>
       </li>
-  </ul>
+    </ul>
   </div>
 </nav>

@@ -11,6 +11,9 @@ import { environment } from '../environments/environment';
 export class DataService {
   private helper = new JwtHelperService;
   ADDRESS = environment.ADDRESS;
+  oc: any;
+  submissoes: any;
+  rejeicoes: any;
 
   constructor(private http: Http, private navbarService: NavbarService) { }
 
@@ -54,7 +57,7 @@ export class DataService {
 
 
   logout() {
-    sessionStorage.removeItem('token');
+    sessionStorage.clear();
     window.location.reload();
   }
 
@@ -98,9 +101,11 @@ export class DataService {
      const helper = new JwtHelperService;
     return helper.decodeToken(sessionStorage.getItem('token')).sts;
   }
-
+  /**
+   * status , datastatus
+   */
   getLeadSts () {
-    return this.getData('lead/' + this.getLead());
+    return this.getData('leadsts/' + this.getLead());
   }
 
   getName () {
@@ -112,6 +117,76 @@ export class DataService {
     const helper = new JwtHelperService;
     return helper.decodeToken(sessionStorage.getItem('token')).email;
   }
+
+  isReadOnly () {
+    const sts = this.getLoginLeadStatus();
+    if ((sts == 4 || sts==8 || sts >= 10) &&  !(sts == 37 || sts == 38)) {
+      return true;
+    }
+    return false;
+  }
+
+
+  /**
+   *
+   * @param lead Carrega os forms com o processo
+   */
+  loadForms(lead: number) {
+    this.getData('cltcr/' + lead).subscribe(
+      resp => {
+        const processo = resp.json().lead;
+
+        /* Outros créditos */
+        if (resp.json().oc) {
+          this.oc = resp.json().oc[0];
+        } else {
+          this.oc = {'valorcredito': null, 'prestacao': null};
+        }
+
+        const form1 = JSON.stringify({'id': processo.id, 'anoinicio': processo.anoinicio, 'anoinicio2': processo.anoinicio2,
+          'anoiniciohabitacao': processo.anoiniciohabitacao, 'anoiniciohabitacao2': processo.anoiniciohabitacao2,
+         'datainicio': processo.datainicio, 'datastatus': processo.datastatus, 'email': processo.email,
+        'estadocivil': processo.estadocivil, 'filhos': processo.filhos, 'tipohabitacao': processo.tipohabitacao,
+        'idade': processo.idade, 'idade2': processo.idade2, 'irs': processo.irs, 'nif': processo.nif,
+        'nif2': processo.nif2, 'nome': processo.nome, 'nome2': processo.nome2, 'parentesco2': processo.parentesco2,
+        'profissao': processo.profissao, 'profissao2': processo.profissao2, 'relacaofamiliar': processo.relacaofamiliar,
+        'segundoproponente': processo.segundoproponente, 'status': processo.status, 'telefone': processo.telefone,
+        'telefone2': processo.telefone2, 'tipocontrato': processo.tipocontrato, 'tipocontrato2': processo.tipocontrato2,
+        'tipohabitacao2': processo.tipohabitacao2, 'valorhabitacao': processo.valorhabitacao, 'sts': processo.sts,
+        'valorhabitacao2': processo.valorhabitacao2, 'vencimento': processo.vencimento, 'vencimento2': processo.vencimento2,
+        'ocValor': this.oc.valorcredito, 'ocPrestacao': this.oc.prestacao });
+
+        const form2 = JSON.stringify({'tipocredito': processo.tipocredito, 'valorpretendido': processo.valorpretendido,
+         'prazopretendido': processo.prazopretendido, 'prestacaopretendida': processo.prestacaopretendida,
+          'finalidade': processo.finalidade, 'outrainfo': processo.outrainfo});
+
+         sessionStorage.form1 = form1;
+         sessionStorage.form2 = form2;
+         sessionStorage.responsavel = JSON.stringify({'gestor': processo.gestor, 'telefone': processo.telefonegestor,
+                                        'email': processo.emailgestor, 'analista': processo.nomeanalista,
+                                         'telefoneAnalista': processo.telefoneAnalista});
+
+         /*  Submissões */
+        if (resp.json().submissoes[0] != undefined) {
+          this.submissoes = resp.json().submissoes[0];
+        } else {
+          this.submissoes = {};
+        }
+
+         /* Rejeições */
+        if (resp.json().rejeicoes[0] != undefined) {
+          this.rejeicoes = resp.json().rejeicoes[0];
+        } else {
+          this.rejeicoes = {};
+        }
+
+          sessionStorage.submissoes = JSON.stringify(this.submissoes);
+          sessionStorage.rejeicoes = JSON.stringify(this.rejeicoes);
+      }
+    );
+    return true;
+  }
+
 }
 
 

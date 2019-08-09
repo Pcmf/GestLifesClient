@@ -15,13 +15,14 @@ export class FormComponent implements OnInit {
   public lead: any = [];
   public segundoProponente = false;
   public showAlert = false;
+  public readOnly = false;
 
   constructor(private dataService: DataService, private route: Router) {
     if (sessionStorage.getItem('form1')) {
       this.lead = JSON.parse(sessionStorage.getItem('form1'));
     }
-
-
+    this.lead.segundoproponente == 1 ? this.lead.segundoproponente = true : this.lead.segundoproponente = false;
+    this.readOnly = this.dataService.isReadOnly();
   }
 
   ngOnInit() {
@@ -55,33 +56,48 @@ export class FormComponent implements OnInit {
   }
 
   saveFormInfo(form) {
-
-    // console.log(form.value + '\n' + form.valid);
-    if (form.valid) {
-      const obj = form.value;
-      this.showAlert = true;
-      sessionStorage.form1 = JSON.stringify(form.value);
-      if (sessionStorage.form2) {
-        const f2 = JSON.parse(sessionStorage.form2);
-        console.log(f2.valorpretendido);
-        obj.valorpretendido = f2.valorpretendido;
-        obj.prazopretendido = f2.prazopretendido;
-        obj.prestacaopretendida = f2.prestacaopretendida;
-        obj.finalidade = f2.finalidade;
-        obj.outrainfo = f2.outrainfo;
-        obj.tipocredito = f2.tipocredito;
-      }
-
-      this.dataService.editData('saveform/' + this.dataService.getLead(), obj).subscribe(
-        resp => {
-          console.log('Resposta do SaveForm: ' + resp);
-          if (resp.status === 200) {
-            this.route.navigate(['/form2']);
-          }
-        }
-      );
+    // Se estiver em modo editavel não guarda na BD
+    if (this.readOnly) {
+      this.route.navigate(['/form2']);
     } else {
-      this.showAlert = true;
+
+      // console.log(form.value + '\n' + form.valid);
+      if (form.valid) {
+        const obj = form.value;
+        this.showAlert = true;
+        sessionStorage.form1 = JSON.stringify(form.value);
+        // Carrega dados a partir do sessionStorage Form2
+        if (sessionStorage.form2) {
+          const f2 = JSON.parse(sessionStorage.form2);
+          console.log(f2.valorpretendido);
+          obj.valorpretendido = f2.valorpretendido;
+          obj.prazopretendido = f2.prazopretendido;
+          obj.prestacaopretendida = f2.prestacaopretendida;
+          obj.finalidade = f2.finalidade;
+          obj.outrainfo = f2.outrainfo;
+          obj.tipocredito = f2.tipocredito;
+        }
+        this.dataService.getLeadSts().subscribe(
+          sts => {
+            obj.status = sts.json().status;
+            if (obj.status < 10) {
+              obj.status = 37;
+            }
+
+            this.dataService.editData('saveform/' + this.dataService.getLead(), obj).subscribe(
+              resp => {
+                //  console.log('Resposta do SaveForm: ' + resp);
+                if (resp.status === 200) {
+                  this.route.navigate(['/form2']);
+                }
+              }
+            );
+          }
+        );
+
+      } else {
+        this.showAlert = true;
+      }
     }
   }
 

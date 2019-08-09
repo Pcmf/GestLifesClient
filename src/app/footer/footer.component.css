@@ -3,3 +3,10 @@
     font-size: .6em;
     text-align: justify;
 }
+
+.copyright{
+    text-align: center;
+    color: blue;
+    font-size: 1em;
+    font-weight: 500;
+}

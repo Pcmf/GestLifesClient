@@ -1,0 +1,38 @@
+
+/* closed */
+.slide-menu-c {
+    transition: all .5s;
+    position: absolute;
+    top: 160px;
+    right: 0px;
+    width: 0px;
+    height: 460px;
+    background-color: #ffffff;
+    z-index: 900;
+}
+/* open */
+.slide-menu-o {
+    transition: all .5s;
+    position: absolute;
+    top: 160px;
+    right: 0px;
+    width: 340px;
+    height: 460px;
+    background-color: #ffffff;
+    z-index: 900;
+    border: black 1px inset;
+}
+
+.btn-c{
+    transition: all .5s;
+    display: none;
+    z-index: 900     
+}
+.btn-o {
+    transition: all .5s;
+    position: absolute;
+    top: 10px;
+    left: 40px;
+    display: block;
+    z-index: 900;
+}

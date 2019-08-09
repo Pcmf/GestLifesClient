@@ -11,12 +11,13 @@ export class Form2Component implements OnInit {
   public tpc = 'CP';
   public form2: any = [];
   public showAlert = false;
+  public readOnly = false;
 
   constructor(private dataService: DataService, private route: Router) {
     if (sessionStorage.getItem('form2')) {
       this.form2 = JSON.parse(sessionStorage.getItem('form2'));
     }
-
+    this.readOnly = this.dataService.isReadOnly();
   }
 
   ngOnInit() {
@@ -26,19 +27,23 @@ export class Form2Component implements OnInit {
   }
 
   saveCredito(form) {
-    if (form.valid) {
-      this.showAlert = false;
-      sessionStorage.form2 = JSON.stringify(form.value);
-      this.dataService.editData('upform/' + this.dataService.getLead(), form.value).subscribe(
-        resp => {
-          //  console.log('Resposta do Update Form: ' + resp);
-          if (resp.status === 200) {
-            this.route.navigate(['/docs/']);
-          }
-        }
-      );
+    if (this.readOnly) {
+      this.route.navigate(['/docs/']);
     } else {
-      this.showAlert = true;
+      if (form.valid) {
+        this.showAlert = false;
+        sessionStorage.form2 = JSON.stringify(form.value);
+        this.dataService.editData('upform/' + this.dataService.getLead(), form.value).subscribe(
+          resp => {
+            //  console.log('Resposta do Update Form: ' + resp);
+            if (resp.status === 200) {
+              this.route.navigate(['/docs/']);
+            }
+          }
+        );
+      } else {
+        this.showAlert = true;
+      }
     }
   }
 }
