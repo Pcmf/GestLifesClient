@@ -99,9 +99,11 @@ export class DocsComponent implements OnInit {
       resps => {
         let status = resps.json().status;
         console.log('status inicial ' + status);
-        if (status == 8 || status == 9 || status == 37 || status == 38) {
+        if (status == 8 || status == 9 || status == 37 || status == 38 ) {
           status = 36;
-          console.log('alterou status ' + status);
+        }
+        if ( status == 21 ) {
+          status = 22;
         }
         // mudar o status para 36
         const obj = { 'lead': this.dataService.getLead(), 'status': status };
