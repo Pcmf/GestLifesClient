@@ -75,7 +75,6 @@ export class DocsComponent implements OnInit {
         if (+resp.json()[0].status != 36 && +resp.json()[0].status != 4 && +resp.json()[0].status != 14 &&
          (+resp.json()[0].status < 10 || +resp.json()[0].status == 37 || +resp.json()[0].status == 38 || +resp.json()[0].status == 21)) {
           this.showBtnFinalizar = true;
-          console.log('Entrou no show finalizar ' + +resp.json()[0].status);
         }
         if (resp.json().length > 0) {
           this.docList = resp.json();
@@ -117,6 +116,13 @@ export class DocsComponent implements OnInit {
       }
     );
   }
-
+  /**
+   * Adicionar um documento depois de ter adicionado todos. Mostrar uma lista de documentos para selecionar o pretendido
+   */
+  addDocExtra() {
+    this.docList.forEach(element => {
+      element.status = 8;
+    });
+  }
 
 }

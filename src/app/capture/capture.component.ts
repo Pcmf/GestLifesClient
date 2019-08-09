@@ -43,7 +43,6 @@ export class CaptureComponent implements OnInit {
   constructor(private route: ActivatedRoute, private dataService: DataService) {
     this.route.queryParamMap.subscribe(
       params => {
-        console.log('Parametro doc: ' + params.get('lead') + params.get('linha'));
         this.dataService.getData('cltdocped/' + params.get('lead') + '/' + params.get('linha') ).subscribe(
           resp => {
             this.docPedido = resp.json()[0];
@@ -91,12 +90,10 @@ export class CaptureComponent implements OnInit {
   }
 
   public handleImage(webcamImage: WebcamImage): void {
-   // console.log('received webcam image', webcamImage.imageAsDataUrl);
     this.webcamImage = webcamImage;
   }
 
   public cameraWasSwitched(deviceId: string): void {
-    console.log('active device: ' + deviceId);
     this.deviceId = deviceId;
   }
 
@@ -164,7 +161,6 @@ export class CaptureComponent implements OnInit {
     this.dataService.saveData('cltdocs', this.obj)
       .subscribe( resp => {
         if (resp) {
-          console.log(resp);
           this.erro = '';
           this.loaded = false;
           window.history.back();
