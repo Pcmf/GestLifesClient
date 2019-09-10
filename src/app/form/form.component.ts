@@ -13,7 +13,7 @@ export class FormComponent implements OnInit {
   relacoes: any = [];
   estados: any = [];
   public lead: any = [];
-  public segundoProponente = false;
+//  public segundoProponente: boolean;
   public showAlert = false;
   public readOnly = false;
 
@@ -21,7 +21,9 @@ export class FormComponent implements OnInit {
     if (sessionStorage.getItem('form1')) {
       this.lead = JSON.parse(sessionStorage.getItem('form1'));
     }
-    this.lead.segundoproponente == 1 ? this.lead.segundoproponente = true : this.lead.segundoproponente = false;
+/*     this.lead.segundoproponente && this.lead.segundoproponente == 1 ? this.segundoProponente = true : this.segundoProponente = undefined;
+    this.lead.segundoproponente && this.lead.segundoproponente == 0 ? 
+    this.segundoProponente = false : this.segundoProponente = undefined; */
     this.readOnly = this.dataService.isReadOnly();
   }
 
@@ -41,16 +43,20 @@ export class FormComponent implements OnInit {
     );
   }
 
+  showResult(f) {
+    console.log(f);
+  }
+
   clear2Prop(prop) {
     if (!prop) {
-      this.lead.nome2 = null;
-      this.lead.idade2 = null;
+     // this.lead.nome2 = null;
+   //   this.lead.idade2 = null;
       this.lead.telefone2 = null;
-      this.lead.nif2 = null;
+    //  this.lead.nif2 = null;
       this.lead.relacaofamiliar = null;
       this.lead.tipocontrato2 = null;
-      this.lead.vencimento2 = null;
-      this.lead.anoinicio2 = null;
+   //   this.lead.vencimento2 = null;
+  //   this.lead.anoinicio2 = null;
 
     }
   }
