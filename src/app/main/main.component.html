@@ -44,7 +44,7 @@
       <ul class="pt-1" style="list-style: none">
         <li class="">Valor pretendido: <strong class="pull-right">{{credito.valorpretendido | currency:'€'}}</strong></li>
         <li>Prazo: <strong class="pull-right">{{credito.prazopretendido}} Meses</strong></li>
-        <li>Prestação: <strong class="pull-right">{{credito.prestacaopretendida}} €/Mês</strong></li>
+        <li *ngIf="dados.sts==16 || dados.sts==17 || dados.sts==23 || dados.sts==24">Prestação: <strong class="pull-right">{{credito.prestacaopretendida}} €/Mês</strong></li>
       </ul>
     </div>
   <!--AProvado ou Financiado-->

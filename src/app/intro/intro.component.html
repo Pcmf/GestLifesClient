@@ -1,40 +1,32 @@
 <div class="main">
-  
+
   <div class="header">
-    <h2>PORTAL DO CLIENTE</h2>
+    <!-- <h2>PORTAL DO CLIENTE</h2> -->
   </div>
   <div class="container">
     <div class="sec">
-        <h1 class="d-none d-md-flex justify-content-center">Bem Vindo ao Portal do Cliente</h1>
-        <h5 class="d-flex d-md-none justify-content-center">Bem Vindo ao Portal do Cliente</h5>
-      <p>A <strong>GEST</strong>LIFES permite-lhe iniciar o seu processo de crédito totalmente online de uma forma simples e rápida.</p>
-      <p>Para isso disponibiliza-lhe este meio, onde poderá submeter o seu pedido em <strong>4</strong> simples passos:</p>
+      <h1 class="d-none d-md-flex justify-content-center">Bem Vindo ao Portal do Cliente</h1>
+      <h5 class="d-flex d-md-none justify-content-center">Bem Vindo ao Portal do Cliente</h5>
+      <p>A <strong>GEST</strong>LIFES permite-lhe iniciar o seu processo de crédito totalmente online de uma forma
+        simples e rápida.</p>
 
-      <ul class="">
-        <li>Validar os dados</li>
-        <li>Completar a informação necessária</li>
-        <li>Anexar documentos</li>
-        <li>Acompanhar a situação</li>
-      </ul>
- <!--    </div>
-    <div class="sec2 mt-5" > -->
-      <button class="btn btn-outline-primary btn-block" routerLink="/form">Iniciar Processo de Crédito  >></button>
+      <button class="btn btn-primary btn-block" routerLink="/form">Iniciar Processo de Crédito >></button>
     </div>
 
     <div class="sec3 mt-5" *ngIf="dadosGestor">
-        <div class="card" style="width: 80%; margin: auto;">
-            <div class="card-body">
-              <h5 class="card-title">O seu gestor</h5>
-              <h6 class="card-subtitle mb-2 text-muted">{{dadosGestor.nome}}</h6>
-              <p class="card-text">Para qualquer duvida poderá entrar em contacto comigo através:</p>
-              <a href="" class="card-link"><i class="fa fa-phone"></i> {{dadosGestor.telefone}}</a>
-              <br/>
-              <a href="" class="card-link"><i class="fa fa-envelope"></i> {{dadosGestor.email}}</a>
-            </div>
-          </div>
+      <div class="card" style="width: 80%; margin: auto;">
+        <div class="card-body">
+          <h5 class="card-title">O seu gestor</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{dadosGestor.nome}}</h6>
+          <p class="card-text">Para qualquer duvida poderá entrar em contacto comigo através:</p>
+          <a href="" class="card-link"><i class="fa fa-phone"></i> {{dadosGestor.telefone}}</a>
+          <br />
+          <a href="" class="card-link"><i class="fa fa-envelope"></i> {{dadosGestor.email}}</a>
+        </div>
+      </div>
     </div>
 
   </div>
 
-  
+
 </div>
