@@ -46,7 +46,7 @@ export class CapCompComponent implements OnInit {
         /* console.log('Parametro doc: ' + params.get('lead') + params.get('linha')); */
         this.dataService.getData('cltcomp/' + params.get('lead') + '/' + params.get('linha') ).subscribe(
           resp => {
-            this.docPedido = resp.json()[0];
+            this.docPedido = resp[0];
           }
         );
       }

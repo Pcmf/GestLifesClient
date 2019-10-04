@@ -11,7 +11,7 @@ export class IntroComponent implements OnInit {
   constructor (private dataService: DataService) {
     this.dataService.getData('dgest/' + this.dataService.getLead()).subscribe(
       resp => {
-        this.dadosGestor = resp.json()[0];
+        this.dadosGestor = resp[0];
       }
     );
   }

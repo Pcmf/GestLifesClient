@@ -75,7 +75,7 @@ export class LoginComponent {
     this.dataService.getData('lead/' + lead).subscribe(
       resp => {
         //      console.log(resp);
-        const processo = resp.json()[0];
+        const processo = resp[0];
         sessionStorage.form1 = JSON.stringify({
           'id': processo.id, 'nome': processo.nome, 'telefone': processo.telefone,
           'email': processo.email

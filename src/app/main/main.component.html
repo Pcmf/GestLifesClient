@@ -5,8 +5,8 @@
         <h4 class="text-center mb-3"><a routerLink="/form" style="color: #000b85; text-decoration: none">DADOS DO SEU PROCESSO</a></h4>
         <!-- <h6 class="text-dados">Nome: <strong>{{dados.nome}}</strong></h6> -->
         <h6 class="text-dados">Numero: <strong>{{dados.id}}</strong></h6>
-        <h6 class="text-dados">Situação: 
-          <strong *ngIf="dados.sts==9">Anulado por Falta de Documentação</strong>
+        <h6 class="text-dados">Estado: 
+          <strong *ngIf="dados.sts==9"> Anulado por Falta de Documentação</strong>
           <strong *ngIf="dados.sts==38">A Aguardar Documentação</strong>
           <strong *ngIf="dados.sts==36 || dados.sts==10 || dados.sts==11 || dados.sts==22">Em Analise</strong>
           <strong *ngIf="dados.sts!=9 && dados.sts!=10 && dados.sts!=11 && dados.sts!=19 && dados.sts!=25 && dados.sts!=23 && dados.sts!=24 
@@ -14,9 +14,10 @@
           <strong *ngIf="dados.sts==19 || dados.sts==25 || dados.sts==31">Recusado</strong>
           <strong *ngIf="dados.sts==23">Aguarda Comprovativo de Pagamento</strong>
           <strong *ngIf="dados.sts==24">Financiado</strong>
-          <span class="pull-right" *ngIf="dados.sts==8 || dados.sts==21 || dados.sts==38"><a routerLink="/docs"
-              class="btn btn-default btn-sm"><span class="badge badge-pill badge-warning">Anexar</span></a></span>
+
         </h6>
+        <div class="text-center p-3" *ngIf="dados.sts==8 || dados.sts==21 || dados.sts==38"><a routerLink="/docs"
+          class="btn btn-primary">Anexar Documentos</a></div>
         <p *ngIf="dados.sts==4 || dados.sts==5 || dados.sts==14 || dados.sts==15" class="border border-info rounded-lg p-1 small">{{rejeicoes.motivo}}<br/>{{rejeicoes.outro}} </p>
         <p *ngIf="dados.sts==19 || dados.sts==25 || dados.sts==31" class="border border-info rounded-lg p-1 small">{{rejeicoes.motivo}}<br/>{{rejeicoes.outro}} </p>
         <p *ngIf="creditos.dtcontratocliente && dados.sts==16" class="border border-info rounded-lg p-1">
@@ -72,14 +73,14 @@
     <div class="conteudo1">
       <h4 class="text-center mb-3">RESPONSAVEIS PELO PROCESSO</h4>
       <h6>Gestor: <strong>{{responsavel.gestor}} | <span class="fa fa-phone"><span
-              class="tel"> {{responsavel.telefone}}</span> </span></strong></h6>
+              class="tel"><strong> {{responsavel.telefone}}</strong></span> </span></strong></h6>
       <h6><strong> {{responsavel.email}}</strong></h6>
       <h6 *ngIf="responsavel.analista">Analista: <strong>{{responsavel.analista}}</strong>
                   | <span class="fa fa-phone"><span
                     class="tel"> {{responsavel.telefoneAnalista}}</span> </span>
                 </h6>
 
-      <p class="pt-5"><span style="color: black; font-size: small">Poderá entrar em contacto com a Gestlifes através do nosso numero geral:<span class="phone"> (+351) 220
+      <p class="pt-5"><span style="color: black;font-weight: 600">Poderá entrar em contacto com a Gestlifes através do nosso numero geral:<span class="phone"> (+351) 220
             931 950</span> no horario 9:30h ás 19:00h.</span></p>
     </div>
   </div>

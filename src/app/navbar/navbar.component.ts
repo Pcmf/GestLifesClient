@@ -50,8 +50,8 @@ export class NavbarComponent implements OnDestroy {
 
   redirectTo () {
     this.loginService.getLeadSts().subscribe(
-      resp => {
-        this.status = resp.json().status;
+      (resp: any) => {
+        this.status = resp.status;
         console.log(this.status);
             if ( this.status!=4 && (this.status < 8 || this.status == 37) )  {
                 this.router.navigate(['/intro']);

@@ -1,5 +1,5 @@
 import { Injectable, Input } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { NavbarService } from './navbar.service';
 import { map } from 'rxjs/operators';
@@ -15,7 +15,7 @@ export class DataService {
   submissoes: any;
   rejeicoes: any;
 
-  constructor(private http: Http, private navbarService: NavbarService) { }
+  constructor(private http: HttpClient, private navbarService: NavbarService) { }
 
   /**  */
   getData ( params) {
@@ -133,12 +133,12 @@ export class DataService {
    */
   loadForms(lead: number) {
     this.getData('cltcr/' + lead).subscribe(
-      resp => {
-        const processo = resp.json().lead;
+      (resp: any) => {
+        const processo = resp.lead;
 
         /* Outros créditos */
-        if (resp.json().oc) {
-          this.oc = resp.json().oc[0];
+        if (resp.oc) {
+          this.oc = resp.oc[0];
         } else {
           this.oc = {'valorcredito': null, 'prestacao': null};
         }
@@ -167,15 +167,15 @@ export class DataService {
                                          'telefoneAnalista': processo.telefoneAnalista});
 
          /*  Submissões */
-        if (resp.json().submissoes[0] != undefined) {
-          this.submissoes = resp.json().submissoes[0];
+        if (resp.submissoes[0] != undefined) {
+          this.submissoes = resp.submissoes[0];
         } else {
           this.submissoes = {};
         }
 
          /* Rejeições */
-        if (resp.json().rejeicoes[0] != undefined) {
-          this.rejeicoes = resp.json().rejeicoes[0];
+        if (resp.rejeicoes[0] != undefined) {
+          this.rejeicoes = resp.rejeicoes[0];
         } else {
           this.rejeicoes = {};
         }

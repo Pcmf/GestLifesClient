@@ -26,9 +26,9 @@ input, select, option{
 }
 
 .infoTipoCredito {
-    font-size: small;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color:  darkslategray;     
+     font-size: small;
+/*    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color:  darkslategray;     */ 
 }
 
 .alert{

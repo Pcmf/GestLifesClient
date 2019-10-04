@@ -2,8 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import {WebcamModule} from 'ngx-webcam';
-import {LocationStrategy, HashLocationStrategy} from '@angular/common';
+import { WebcamModule } from 'ngx-webcam';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -12,7 +12,7 @@ import { DocsComponent } from './docs/docs.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AuthGuardService } from './auth-guard.service';
 import { DataService } from './data.service';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ShowDocComponent } from './show-doc/show-doc.component';
 import { InfoComponent } from './info/info.component';
 import { ChangeComponent } from './change/change.component';
@@ -52,7 +52,7 @@ import { MenuComponent } from './menu/menu.component';
   ],
   imports: [
     BrowserModule,
-    HttpModule,
+    HttpClientModule,
     FormsModule,
     WebcamModule,
     RouterModule.forRoot([
@@ -73,7 +73,7 @@ import { MenuComponent } from './menu/menu.component';
       {path: 'faq' , component: HelpComponent, canActivate: [AuthGuardService]},
       {path: '**', component: MainComponent, canActivate: [AuthGuardService]},
       {path: '**', component: LoginComponent }
-    ])
+    ], {scrollPositionRestoration: 'enabled'})
   ],
  // providers: [DataService, AuthGuardService, {provide: APP_BASE_HREF, useValue: '/sisleads/GestLifesClient/'}],
   providers: [DataService, AuthGuardService, {provide: LocationStrategy, useClass: HashLocationStrategy}],

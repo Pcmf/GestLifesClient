@@ -30,16 +30,16 @@ export class FormComponent implements OnInit {
   ngOnInit() {
 
     this.dataService.getData('getdata/' + 'cnf_sitprofissional').subscribe(
-      resp => this.situacoes = resp.json()
+      resp => this.situacoes = resp
     );
     this.dataService.getData('getdata/' + 'cnf_tipohabitacao').subscribe(
-      resp => this.habitacoes = resp.json()
+      resp => this.habitacoes = resp
     );
     this.dataService.getData('getdata/' + 'cnf_relacaofamiliar').subscribe(
-      resp => this.relacoes = resp.json()
+      resp => this.relacoes = resp
     );
     this.dataService.getData('getdata/' + 'cnf_sitfamiliar').subscribe(
-      resp => this.estados = resp.json()
+      resp => this.estados = resp
     );
   }
 
@@ -84,14 +84,14 @@ export class FormComponent implements OnInit {
           obj.tipocredito = f2.tipocredito;
         }
         this.dataService.getLeadSts().subscribe(
-          sts => {
-            obj.status = sts.json().status;
+          (sts: any) => {
+            obj.status = sts.status;
             if (obj.status < 10) {
               obj.status = 37;
             }
 
             this.dataService.editData('saveform/' + this.dataService.getLead(), obj).subscribe(
-              resp => {
+              (resp: any) => {
                 //  console.log('Resposta do SaveForm: ' + resp);
                 if (resp.status === 200) {
                   this.route.navigate(['/form2']);

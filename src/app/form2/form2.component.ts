@@ -34,7 +34,7 @@ export class Form2Component implements OnInit {
         this.showAlert = false;
         sessionStorage.form2 = JSON.stringify(form.value);
         this.dataService.editData('upform/' + this.dataService.getLead(), form.value).subscribe(
-          resp => {
+          (resp: any) => {
             //  console.log('Resposta do Update Form: ' + resp);
             if (resp.status === 200) {
               this.route.navigate(['/docs/']);

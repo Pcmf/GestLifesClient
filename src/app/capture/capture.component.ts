@@ -45,7 +45,7 @@ export class CaptureComponent implements OnInit {
       params => {
         this.dataService.getData('cltdocped/' + params.get('lead') + '/' + params.get('linha') ).subscribe(
           resp => {
-            this.docPedido = resp.json()[0];
+            this.docPedido = resp[0];
           }
         );
       }

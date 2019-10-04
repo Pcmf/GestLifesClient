@@ -68,7 +68,7 @@ export class ComprovativosComponent implements OnInit {
   loadDados () {
     this.dataService.getData('cltcomp/' + this.dataService.getLead()).subscribe(
       resp => {
-        this.docList = resp.json();
+        this.docList = resp;
         console.log(this.docList);
       }
     );
@@ -78,7 +78,7 @@ export class ComprovativosComponent implements OnInit {
   openDoc (doc) {
     this.dataService.getData('doc/' + doc.lead + '/' + doc.linha).subscribe(
       (resp: any) => {
-        const document = resp.json()[0];
+        const document = resp[0];
         const file = new Blob([document.fx64], {type: 'application/pdf'});
         const fileURL = URL.createObjectURL(file);
         window.open(fileURL);

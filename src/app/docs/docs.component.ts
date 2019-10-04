@@ -72,12 +72,12 @@ export class DocsComponent implements OnInit {
   loadDados() {
     this.dataService.getData('cltdocs/' + this.dataService.getLead()).subscribe(
       (resp: any) => {
-        if (+resp.json()[0].status != 36 && +resp.json()[0].status != 4 && +resp.json()[0].status != 14 &&
-         (+resp.json()[0].status < 10 || +resp.json()[0].status == 37 || +resp.json()[0].status == 38 || +resp.json()[0].status == 21)) {
+        if (+resp[0].status != 36 && +resp[0].status != 4 && +resp[0].status != 14 &&
+         (+resp[0].status < 10 || +resp[0].status == 37 || +resp[0].status == 38 || +resp[0].status == 21)) {
           this.showBtnFinalizar = true;
         }
-        if (resp.json().length > 0) {
-          this.docList = resp.json();
+        if (resp.length > 0) {
+          this.docList = resp;
           let n = 0;
           let r = 0;
           this.docList.forEach(e => {
@@ -96,8 +96,8 @@ export class DocsComponent implements OnInit {
   finalizar() {
     // Verificar o status da lead
     this.dataService.getLeadSts().subscribe(
-      resps => {
-        let status = resps.json().status;
+      (resps: any) => {
+        let status = resps.status;
         console.log('status inicial ' + status);
         if (status == 8 || status == 9 || status == 37 || status == 38 ) {
           status = 36;
@@ -125,6 +125,10 @@ export class DocsComponent implements OnInit {
     this.docList.forEach(element => {
       element.status = 8;
     });
+  }
+
+  pausa() {
+    this.router.navigate(['/']);
   }
 
 }

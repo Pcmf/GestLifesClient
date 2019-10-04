@@ -35,12 +35,16 @@
       </a>
     </div>
     <div class="text-center mt-3">
-      <button class="btn btn-outline-warning" *ngIf="!missingDocs && showBtnFinalizar"
+      <button class="btn btn-warning" *ngIf="missingDocs"
+        (click)="pausa()">Continuar mais tarde</button>
+    </div>
+    <div class="text-center mt-3">
+      <button class="btn btn-warning" *ngIf="!missingDocs && showBtnFinalizar"
         (click)="finalizar()">Finalizar</button>
     </div>
     <!-- Documento Extra-->
     <div class="text-center mt-3">
-      <button class="btn btn-outline-warning" *ngIf="!missingDocs && !showBtnFinalizar"
+      <button class="btn btn-warning" *ngIf="!missingDocs && !showBtnFinalizar"
         (click)="addDocExtra()">Adicionar Documento Extra</button>
     </div>
   </div>

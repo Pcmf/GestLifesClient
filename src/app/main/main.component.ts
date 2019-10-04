@@ -18,7 +18,7 @@ export class MainComponent implements OnInit {
   constructor(private dataService: DataService) {
 
     this.dataService.getLeadSts().subscribe(
-      resp => {
+      (resp: any) => {
         if (sessionStorage.getItem('form1')) {
           this.dados = JSON.parse(sessionStorage.getItem('form1'));
         }
@@ -34,8 +34,8 @@ export class MainComponent implements OnInit {
         if (sessionStorage.getItem('rejeicoes')) {
           this.rejeicoes = JSON.parse(sessionStorage.getItem('rejeicoes'));
         }
-        this.dados.sts = resp.json().status;
-        this.dados.datastatus = resp.json().datastatus;
+        this.dados.sts = resp.status;
+        this.dados.datastatus = resp.datastatus;
       }
     );
   }
