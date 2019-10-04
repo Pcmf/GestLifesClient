@@ -41,10 +41,9 @@ export class DataService {
         JSON.stringify(credenciais))
         .pipe(
           map((response: any) => {
-           console.log(response._body);
-          if ( response._body) {
-              sessionStorage.setItem('token', response._body);
-              this.navbarService.setNavState(this.helper.decodeToken(response._body));
+          if ( response) {
+              sessionStorage.setItem('token', response);
+              this.navbarService.setNavState(this.helper.decodeToken(response));
               return true;
             } else {
               return false;
@@ -75,10 +74,10 @@ export class DataService {
        JSON.stringify(credenciais))
        .pipe(
          map((response: any) => {
-           if ( response._body ) {
-             sessionStorage.setItem('token', response._body);
+           if ( response ) {
+             sessionStorage.setItem('token', response);
              //
-             this.navbarService.setNavState(this.helper.decodeToken(response._body));
+             this.navbarService.setNavState(this.helper.decodeToken(response));
              return true;
            } else {
              return false;

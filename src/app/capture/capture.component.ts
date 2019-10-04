@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {WebcamImage, WebcamInitError, WebcamUtil} from 'ngx-webcam';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../data.service';
 
 @Component({
@@ -40,7 +40,7 @@ export class CaptureComponent implements OnInit {
   private filename: string;
   private obj: any = {};
 
-  constructor(private route: ActivatedRoute, private dataService: DataService) {
+  constructor(private route: ActivatedRoute, private dataService: DataService, private router: Router) {
     this.route.queryParamMap.subscribe(
       params => {
         this.dataService.getData('cltdocped/' + params.get('lead') + '/' + params.get('linha') ).subscribe(
@@ -163,7 +163,8 @@ export class CaptureComponent implements OnInit {
         if (resp) {
           this.erro = '';
           this.loaded = false;
-          window.history.back();
+         // window.history.back();
+         this.router.navigate(['/docs']);
         }
       });
   }

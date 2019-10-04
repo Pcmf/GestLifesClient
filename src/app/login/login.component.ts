@@ -44,6 +44,7 @@ export class LoginComponent {
       this.dataService.checkuser(credenciais)
         .subscribe(
           (response: any) => {
+            console.log('response: ' + response);
             if (response) {
               this.logErro = false;
               const sts = this.dataService.getLoginLeadStatus();
