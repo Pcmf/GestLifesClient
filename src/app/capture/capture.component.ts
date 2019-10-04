@@ -167,4 +167,8 @@ export class CaptureComponent implements OnInit {
         }
       });
   }
+
+  back() {
+    window.history.back();
+  }
 }
