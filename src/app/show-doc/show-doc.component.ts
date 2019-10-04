@@ -23,7 +23,7 @@ export class ShowDocComponent implements OnInit {
         this.linha = +params.get('ln');
         this.dataService.getData('doc/' + this.lead + '/' + this.linha).subscribe(
           (resp: any) => {
-            const document = resp.json()[0];
+            const document = resp[0];
             this.fxNome = document.nomedoc;
             if (document.tipo === 'pdf') {
               this.imagePath = this._sanitizer.bypassSecurityTrustResourceUrl('data:application/pdf;base64,' + document.fx64);

@@ -109,7 +109,7 @@ export class CaptureComponent implements OnInit {
     const obj = { 'doc': this.docPedido, 'imagem': this.webcamImage.imageAsDataUrl};
     this.dataService.saveData('cltupimg', obj).subscribe(
       resp => {
-          window.history.back();
+        this.router.navigate(['/docs']);
       }
     );
   }
@@ -160,12 +160,10 @@ export class CaptureComponent implements OnInit {
   confirmaAnexar () {
     this.dataService.saveData('cltdocs', this.obj)
       .subscribe( resp => {
-        if (resp) {
+        console.log('Confirma anexar:' + resp);
           this.erro = '';
           this.loaded = false;
-         // window.history.back();
-         this.router.navigate(['/docs']);
-        }
+          this.router.navigate(['/docs']);
       });
   }
 

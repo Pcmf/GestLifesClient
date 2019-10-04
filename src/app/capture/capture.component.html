@@ -16,7 +16,7 @@
         <input *ngIf="!camera" class="btn btn-outline-success" name="docToUpload" type="file" accept="pdf/*" ngModel
           (change)="handleInputChange($event, docSelected )" (click)="selectFile()" />
       </div>
-      <div class="col-12 col-md-4">
+      <div class="col-12 col-md-4" *ngIf="!file">
         <button class="btn btn-warning" (click)="back()">Cancelar</button>
       </div>
     </div>
