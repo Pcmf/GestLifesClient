@@ -4,46 +4,31 @@
     height: 100vh;
 }
 
+.header{
+    background-image: url("../../assets/img/familia2.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 45vh;
+    color: yellow;
+    text-shadow: 1px 1px 1px;
+}
+
 .modulos{
     flex-grow:1;
     display: flex;
     justify-content: center;
 }
+
 .conteudo1{
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
-    flex-basis: 460px;
+    /* flex-basis: 460px; */
 }
-.conteudo1 h4{
-    text-shadow: 1px 1px 1px #000b85;
+h4, h6{
+    text-shadow: 0.1px 0.2px #000b85;
 }
-.header{
-    background-color: rgb(250, 223, 114);
-    color: #0C3A8E;
-    background-image: url("../../assets/img/top.png");
-    background-size: 100%;
-    background-blend-mode:overlay;
-}
-
-.simula{
-    background-color: #0C3A8E;
-    background-image: url("../../assets/img/323211_tr.png");
-    background-blend-mode: overlay;
-    background-size: 100%;
-    color: white;
-}
-
-.repons{
-    background-color: rgb(164, 193, 248);
-    background-image: url("../../assets/img/keyboard.png");
-    background-size: cover;
-    background-repeat: none;
-    background-blend-mode: overlay;
-    color: #0C3A8E;
-    font-size: .8rem;
-}
-
 
 .text-dados{
     color: #0C3A8E;
