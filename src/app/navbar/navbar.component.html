@@ -10,37 +10,37 @@
     </span>
   </button>
 
-  <div class="collapse navbar-collapse mt-3" id="navbarNav">
+  <div class="collapse navbar-collapse mt-3" id="navbarNav" >
     <ul class="navbar-nav mr-auto" *ngIf="isLoggedIn()">
-      <li class="nav-item active">
-        <a class="nav-link small text-uppercase" routerLink="/form" routerLinkActive="active current">
+      <li class="nav-item active"> 
+        <a class="nav-link small " routerLink="/form" routerLinkActive="active current">
           <!-- <i class="fa fa-briefcase" aria-hidden="true"></i>  -->
           Processo</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link small text-uppercase" routerLink="/docs" routerLinkActive="active current">
+        <a class="nav-link small " routerLink="/docs" routerLinkActive="active current">
           <!-- <i class="fa fa-file" aria-hidden="true"></i>  -->
           Documentação</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link small text-uppercase" routerLink="/cc" routerLinkActive="active current">
+        <a class="nav-link small " routerLink="/cc" routerLinkActive="active current">
           <!-- <i class="fa fa-cc" aria-hidden="true"></i> -->
            Cartão de Crédito</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link small text-uppercase" routerLink="/faq" routerLinkActive="active current">
+        <a class="nav-link small " routerLink="/faq" routerLinkActive="active current">
           <!-- <i class="fa fa-question" aria-hidden="true"></i> -->
            FAQs</a>
       </li>
     </ul>
     <ul class="navbar-nav">
-      <li class="nav-item small text-uppercase" routerLinkActive="active">
+      <li class="nav-item small " routerLinkActive="active">
         <a *ngIf="isLoggedIn()" class="nav-link" routerLink="/change" title="Click para alterar a senha de acesso">
           <i class="fa fa-user"></i> {{loginName}}
         </a>
       </li>
       <li class="nav-item">
-        <a *ngIf="isLoggedIn()" class="nav-link  small text-uppercase" (click)="logout()" routerLink="/login"
+        <a *ngIf="isLoggedIn()" class="nav-link  small " (click)="logout()" routerLink="/login"
           title="Click para sair">
           <i class="fa fa-sign-out"></i>Sair</a>
       </li>

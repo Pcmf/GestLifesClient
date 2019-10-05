@@ -93,7 +93,7 @@ export class FormComponent implements OnInit {
             this.dataService.editData('saveform/' + this.dataService.getLead(), obj).subscribe(
               (resp: any) => {
                 //  console.log('Resposta do SaveForm: ' + resp);
-                if (resp.status === 200) {
+                if (resp == 'OK') {
                   this.route.navigate(['/form2']);
                 }
               }

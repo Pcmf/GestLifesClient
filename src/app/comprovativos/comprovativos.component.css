@@ -1,0 +1,7 @@
+.header{
+    background-image: url("../../assets/img/happy-family.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 45vh;
+}

@@ -119,7 +119,7 @@ export class DataService {
 
   isReadOnly () {
     const sts = this.getLoginLeadStatus();
-    if ((sts == 4 || sts==8 || sts >= 10) &&  !(sts == 37 || sts == 38)) {
+    if ((sts == 4 || sts >= 10) &&  !(sts == 37 || sts == 38)) {
       return true;
     }
     return false;
