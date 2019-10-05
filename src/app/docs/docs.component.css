@@ -17,3 +17,7 @@
     background-position: center;
     min-height: 25vh;
 }
+
+h2, h6{
+    text-shadow: 0.1px 0.2px;
+}

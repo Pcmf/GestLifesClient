@@ -44,3 +44,6 @@ input, select, option{
     /* background-color: #fdfdfd; */
     
 }
+h2{
+    text-shadow: 1px 1px;
+}
