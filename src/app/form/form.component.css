@@ -63,3 +63,6 @@ input, select, option{
         transition-timing-function: linear;
         transition-delay: 1s;
 }
+h2, h6{
+    text-shadow: 0.1px 0.2px;
+}
