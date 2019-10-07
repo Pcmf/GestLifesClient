@@ -56,12 +56,10 @@ export class ComprovativosComponent implements OnInit {
   confirmaAnexar () {
     this.dataService.saveData('cltcomp', this.obj)
       .subscribe( resp => {
-        if (resp) {
           console.log(resp);
           this.erro = '';
           this.loaded = false;
           this.loadDados();
-        }
       });
   }
 
@@ -69,7 +67,9 @@ export class ComprovativosComponent implements OnInit {
     this.dataService.getData('cltcomp/' + this.dataService.getLead()).subscribe(
       resp => {
         this.docList = resp;
-        console.log(this.docList);
+        setTimeout(() => {
+          this.route.navigate(['/']);
+        }, 1000);
       }
     );
   }

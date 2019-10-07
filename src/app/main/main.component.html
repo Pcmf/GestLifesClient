@@ -50,13 +50,13 @@
       <h6 class="d-flex d-md-none justify-content-center">
         <a routerLink="/form2" style="color: #000b85; text-decoration: none">SIMULAÇÃO DO CRÉDITO</a>
       </h6>
-      <p class="text-center">
+      <p class="text-center text-dados">
         <strong *ngIf="credito.tipocredito==='CP'">Crédito Pessoal</strong>
         <strong *ngIf="credito.tipocredito==='CC'">Crédito Consolidado</strong>
         <strong *ngIf="credito.tipocredito==='AU'">Crédito Automovél</strong>
       </p>
 
-      <ul class="pt-1" style="list-style: none">
+      <ul class="pt-1  text-dados" style="list-style: none">
         <li class="">Valor pretendido: <strong class="pull-right">{{credito.valorpretendido | currency:'€'}}</strong>
         </li>
         <li>Prazo: <strong class="pull-right">{{credito.prazopretendido}} Meses</strong></li>
@@ -66,17 +66,20 @@
     </div>
     <!--AProvado ou Financiado-->
     <div class="conteudo1" *ngIf="dados.sts==16 || dados.sts==17 || dados.sts==23 || dados.sts==24">
-      <h4 class="text-center">
-        <a routerLink="/form2" style="color:white; text-decoration: none">DADOS DO CRÉDITO</a>
+      <h4 class="d-none d-md-flex justify-content-center">
+        <a routerLink="/form2" style="color: #000b85; text-decoration: none">DADOS DO CRÉDITO</a>
       </h4>
+      <h6 class="d-flex d-md-none justify-content-center">
+          <a routerLink="/form2" style="color: #000b85; text-decoration: none">SIMULAÇÃO DO CRÉDITO</a>
+        </h6>
 
-      <h6 class="text-center">
+      <h6 class="text-center  text-dados">
         <strong *ngIf="creditos.tipocredito==='CP'">Crédito Pessoal</strong>
         <strong *ngIf="creditos.tipocredito==='CC'">Crédito Consolidado</strong>
         <strong *ngIf="creditos.tipocredito==='AU'">Crédito Automovél</strong>
       </h6>
 
-      <ul class="pt-1" style="list-style: none">
+      <ul class="pt-1 text-dados" style="list-style: none">
         <li class="">Valor : <strong class="pull-right">{{creditos.montante | currency:'€'}}</strong></li>
         <li>Prazo: <strong class="pull-right">{{creditos.prazo}} Meses</strong></li>
         <li>Prestação: <strong class="pull-right">{{creditos.prestacao}} €/Mês</strong></li>
@@ -84,30 +87,35 @@
     </div>
   </div>
 
-    <!-- Responsaveis  pelo processo-->
-    <div class="modulos p-1">
-        <div class="conteudo1">
-          <h4 class="d-none d-md-flex justify-content-center"  style="color: #000b85;">
-            RESPONSAVEIS
-          </h4>
-          <h6 class="d-flex d-md-none justify-content-center"  style="color: #000b85;">
-            RESPONSAVEIS
-          </h6>
-          <p class="text-center"> Gestor: <strong>{{responsavel.gestor}} | 
-                <span class="fa fa-phone"><span class="tel"><strong>
-                  {{responsavel.telefone}}</strong></span> </span></strong></p>
-        <p class="text-center"><strong> {{responsavel.email}}</strong></p>
-        <p *ngIf="responsavel.analista">Analista: <strong>{{responsavel.analista}}</strong>
-          | <span class="fa fa-phone"><span class="tel"> {{responsavel.telefoneAnalista}}</span> </span>
-        </p>
-  
-        <p class=" text-center p-5"><span style="color: black;font-weight: 600">Poderá entrar em contacto com a Gestlifes através do
-            nosso numero geral:<span class="phone"> (+351) 220
-              931 950</span> no horario 9:30h ás 19:00h.</span>
-        </p>
-        </div>
-       </div>
-  
+  <!-- Responsaveis  pelo processo-->
+  <div class="modulos p-1">
+    <div class="conteudo1">
+      <h4 class="d-none d-md-flex justify-content-center" style="color: #000b85;">
+        RESPONSAVEIS
+      </h4>
+      <h6 class="d-flex d-md-none justify-content-center" style="color: #000b85;">
+        RESPONSAVEIS
+      </h6>
+      <p class="text-center text-dados"> Gestor:
+        <strong>{{responsavel.gestor}} |
+          <span class="fa fa-phone">
+            <span class="tel">
+              <strong> {{responsavel.telefone}}</strong>
+            </span>
+          </span>
+        </strong>
+      </p>
+      <p class="text-center text-dados"><strong> {{responsavel.email}}</strong></p>
+      <p class="text-center text-dados" *ngIf="responsavel.analista">Analista: <strong>{{responsavel.analista}}</strong>
+        | <span class="fa fa-phone"><span class="tel"> {{responsavel.telefoneAnalista}}</span> </span>
+      </p>
+
+      <p class="text-center text-dados p-5">Poderá entrar em contacto com a Gestlifes
+          através do nosso numero geral:<span class="phone"> (+351) 220 931 950</span> no horario 9h30 ás 19h00.
+      </p>
+    </div>
+  </div>
+
 
 
 </div>

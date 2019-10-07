@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {WebcamImage, WebcamInitError, WebcamUtil} from 'ngx-webcam';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../data.service';
 
 @Component({
@@ -40,7 +40,7 @@ export class CapCompComponent implements OnInit {
   private filename: string;
   private obj: any = {};
 
-  constructor(private route: ActivatedRoute, private dataService: DataService) {
+  constructor(private route: ActivatedRoute, private dataService: DataService, private router: Router) {
     this.route.queryParamMap.subscribe(
       params => {
         /* console.log('Parametro doc: ' + params.get('lead') + params.get('linha')); */
@@ -112,7 +112,10 @@ export class CapCompComponent implements OnInit {
     const obj = { 'doc': this.docPedido, 'imagem': this.webcamImage.imageAsDataUrl};
     this.dataService.saveData('cltupcomp', obj).subscribe(
       resp => {
-          window.history.back();
+        setTimeout(() => {
+          this.router.navigate(['/docs']);
+        }, 1000);
+
       }
     );
   }

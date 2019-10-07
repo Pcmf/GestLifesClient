@@ -36,13 +36,7 @@ export class Form2Component implements OnInit {
         this.dataService.editData('upform/' + this.dataService.getLead(), form.value).subscribe(
           (resp: any) => {
             //  console.log('Resposta do Update Form: ' + resp);
-<<<<<<< HEAD
-            /* if (resp == 'OK') { */
               this.route.navigate(['/docs/']);
-           /*  } */
-=======
-              this.route.navigate(['/docs/']);
->>>>>>> 58744cff9411761da091a67007715a89dd04dfa7
           }
         );
       } else {

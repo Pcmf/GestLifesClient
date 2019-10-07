@@ -163,7 +163,9 @@ export class CaptureComponent implements OnInit {
         console.log('Confirma anexar:' + resp);
           this.erro = '';
           this.loaded = false;
-          this.router.navigate(['/docs']);
+          setTimeout(() => {
+            this.router.navigate(['/docs']);
+          }, 1000);
       });
   }
 
