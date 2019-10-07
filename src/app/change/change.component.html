@@ -16,8 +16,17 @@
                 class="fa fa-eye"></i></span>
           </div>
         </div>
+        <div class="input-group input-group-sm flex-nowrap">
+            <input class="form-control" required minlength="4" maxlength="10"  [type]="typeField" #cpassword="ngModel" name="cpassword" ngModel
+              placeholder="Confirme senha" />
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="addon-wrapping" (click)="toogleViewPass()"><i
+                  class="fa fa-eye"></i></span>
+            </div>
+        </div>
         
-        <button [disabled]="!password.valid" class="btn btn-outline-success btn-block" type="button" (click)="changePass(password.value)">Submeter</button>
+        <button [disabled]="!password.valid || password.value != cpassword.value" 
+            class="btn btn-success btn-block" type="button" (click)="changePass(password.value)">Submeter</button>
       </div>
 
     </form>
