@@ -1,15 +1,16 @@
 <div class="header p-5 mb-3"></div>
-<div class="main">
-  <div class="modulos p-1">
+
+<div class="container">
+
+
+  <div class="card w-75 h-50 mb-3 shadow rounded text-center">
     <!-- Dados do processo -->
-    <div class="conteudo1">
-      <h4 class="d-none d-md-flex justify-content-center">
-        <a routerLink="/form" style="color: #000b85; text-decoration: none">DADOS DO SEU PROCESSO</a>
-      </h4>
-      <h6 class="d-flex d-md-none justify-content-center">
-        <a routerLink="/form" style="color: #000b85; text-decoration: none">DADOS DO SEU PROCESSO</a>
-      </h6>
+    <div class="card-header">
+      <a routerLink="/form" style="color: #000b85; text-decoration: none">DADOS DO SEU PROCESSO</a>
+    </div>
+    <div class="card-body">
       <p class="text-dados">Numero: <strong>{{dados.id}}</strong></p>
+      <!-- situação do processo -->
       <p class="text-dados">Estado:
         <strong *ngIf="dados.sts==9"> Anulado por Falta de Documentação</strong>
         <strong *ngIf="dados.sts==38">A Aguardar Documentação</strong>
@@ -22,6 +23,10 @@
         <strong *ngIf="dados.sts==24">Financiado</strong>
 
       </p>
+      <!-- data da situação -->
+      <p class="text-dados small">Data: {{dados.datastatus}}</p>
+
+      <!-- informações e ações -->
       <div class="text-center p-3" *ngIf="dados.sts==8 || dados.sts==21 || dados.sts==38">
         <a routerLink="/docs" class="btn btn-primary">Anexar Documentos</a>
       </div>
@@ -36,86 +41,77 @@
         </small>
       </p>
       <p *ngIf="dados.sts==23" class="border border-info rounded-lg p-1 small"><a routerLink="/comp">Ver comprovativos
-          necessários</a></p>
-      <p class="text-dados">Data: {{dados.datastatus}}</p>
+          necessários</a>
+      </p>
+      <p *ngIf="(dados.sts >= 10 && dados.sts <= 13) || dados.sts==36" class="border border-info rounded-lg p-1 small">
+        O seu pedido de crédito está a ser analisado. Por favor aguarde. Obrigado.
+      </p>
+
     </div>
   </div>
 
   <!-- Simulação de Credito-->
-  <div class="modulos p-1">
-    <div class="conteudo1" *ngIf="dados.sts!=16 && dados.sts!=17 && dados.sts!=23 && dados.sts!=24">
-      <h4 class="d-none d-md-flex justify-content-center">
-        <a routerLink="/form2" style="color: #000b85; text-decoration: none">SIMULAÇÃO DO CRÉDITO</a>
-      </h4>
-      <h6 class="d-flex d-md-none justify-content-center">
-        <a routerLink="/form2" style="color: #000b85; text-decoration: none">SIMULAÇÃO DO CRÉDITO</a>
-      </h6>
-      <p class="text-center text-dados">
-        <strong *ngIf="credito.tipocredito==='CP'">Crédito Pessoal</strong>
-        <strong *ngIf="credito.tipocredito==='CC'">Crédito Consolidado</strong>
-        <strong *ngIf="credito.tipocredito==='AU'">Crédito Automovél</strong>
+  <div class="card w-75 h-50 mb-3 shadow rounded text-center"
+    *ngIf="dados.sts!=16 && dados.sts!=17 && dados.sts!=23 && dados.sts!=24">
+    <div class="card-header">
+      <a routerLink="/form2" style="color: #000b85; text-decoration: none">SIMULAÇÃO DO CRÉDITO</a>
+    </div>
+    <div class="card-body">
+      <p>
+        Tipo de Crédito:
+        <strong *ngIf="credito.tipocredito==='CP'"> Crédito Pessoal</strong>
+        <strong *ngIf="credito.tipocredito==='CC'"> Crédito Consolidado</strong>
+        <strong *ngIf="credito.tipocredito==='AU'"> Crédito Automovél</strong>
       </p>
 
-      <ul class="pt-1  text-dados" style="list-style: none">
-        <li class="">Valor pretendido: <strong class="pull-right">{{credito.valorpretendido | currency:'€'}}</strong>
-        </li>
-        <li>Prazo: <strong class="pull-right">{{credito.prazopretendido}} Meses</strong></li>
-        <li *ngIf="dados.sts==16 || dados.sts==17 || dados.sts==23 || dados.sts==24">Prestação: <strong
-            class="pull-right">{{credito.prestacaopretendida}} €/Mês</strong></li>
-      </ul>
+      <p>Valor pretendido: <strong> {{credito.valorpretendido | currency:'€'}}</strong></p>
+      <p>Prazo: <strong> {{credito.prazopretendido}} Meses</strong></p>
+      <p *ngIf="dados.sts==16 || dados.sts==17 || dados.sts==23 || dados.sts==24">Prestação:
+        <strong> {{credito.prestacaopretendida}} €/Mês</strong></p>
     </div>
-    <!--AProvado ou Financiado-->
-    <div class="conteudo1" *ngIf="dados.sts==16 || dados.sts==17 || dados.sts==23 || dados.sts==24">
-      <h4 class="d-none d-md-flex justify-content-center">
-        <a routerLink="/form2" style="color: #000b85; text-decoration: none">DADOS DO CRÉDITO</a>
-      </h4>
-      <h6 class="d-flex d-md-none justify-content-center">
-          <a routerLink="/form2" style="color: #000b85; text-decoration: none">SIMULAÇÃO DO CRÉDITO</a>
-        </h6>
-
-      <h6 class="text-center  text-dados">
-        <strong *ngIf="creditos.tipocredito==='CP'">Crédito Pessoal</strong>
-        <strong *ngIf="creditos.tipocredito==='CC'">Crédito Consolidado</strong>
-        <strong *ngIf="creditos.tipocredito==='AU'">Crédito Automovél</strong>
-      </h6>
-
-      <ul class="pt-1 text-dados" style="list-style: none">
-        <li class="">Valor : <strong class="pull-right">{{creditos.montante | currency:'€'}}</strong></li>
-        <li>Prazo: <strong class="pull-right">{{creditos.prazo}} Meses</strong></li>
-        <li>Prestação: <strong class="pull-right">{{creditos.prestacao}} €/Mês</strong></li>
-      </ul>
+  </div>
+  <!--AProvado ou Financiado-->
+  <div class="card w-75 h-50 m-1 text-center" *ngIf=" dados.sts==16 || dados.sts==17 || dados.sts==23 ||
+    dados.sts==24">
+    <div class="card-header">
+      <a routerLink="/form2" style="color: #000b85; text-decoration: none">DADOS DO CRÉDITO</a>
+    </div>
+    <div class="card-body">
+      <p>Tipo de Crédito: 
+        <strong *ngIf=" creditos.tipocredito==='CP'"> Crédito Pessoal</strong>
+        <strong *ngIf=" creditos.tipocredito==='CC'"> Crédito Consolidado</strong>
+        <strong *ngIf=" creditos.tipocredito==='AU'"> Crédito Automovél</strong>
+      </p>
+        <p>Valor : <strong> {{creditos.montante | currency:'€'}}</strong></p>
+        <p>Prazo: <strong> {{creditos.prazo}} Meses</strong></p>
+        <p>Prestação: <strong> {{creditos.prestacao}} €/Mês</strong></p>
     </div>
   </div>
 
   <!-- Responsaveis  pelo processo-->
-  <div class="modulos p-1">
-    <div class="conteudo1">
-      <h4 class="d-none d-md-flex justify-content-center" style="color: #000b85;">
-        RESPONSAVEIS
-      </h4>
-      <h6 class="d-flex d-md-none justify-content-center" style="color: #000b85;">
-        RESPONSAVEIS
-      </h6>
-      <p class="text-center text-dados"> Gestor:
-        <strong>{{responsavel.gestor}} |
-          <span class="fa fa-phone">
-            <span class="tel">
-              <strong> {{responsavel.telefone}}</strong>
-            </span>
+  <div class=" card w-75 h-50 mb-3 shadow rounded text-center">
+      <div class="card-header">
+        <span style="color: #000b85;">RESPONSAVEIS</span>
+      </div>
+      <div class="card-body">
+        <p>Gestor: <strong> {{responsavel.gestor}}</strong></p>
+        <p>Telefone: 
+          <span class="tel">
+            <strong> {{responsavel.telefone}} </strong><span class="fa fa-phone"></span>
           </span>
-        </strong>
-      </p>
-      <p class="text-center text-dados"><strong> {{responsavel.email}}</strong></p>
-      <p class="text-center text-dados" *ngIf="responsavel.analista">Analista: <strong>{{responsavel.analista}}</strong>
-        | <span class="fa fa-phone"><span class="tel"> {{responsavel.telefoneAnalista}}</span> </span>
-      </p>
+        </p>
+        <p class="text-center text-dados"><strong> {{responsavel.email}}</strong></p>
+        <p class="text-center text-dados" *ngIf="responsavel.analista">Analista: 
+          <strong> {{responsavel.analista}}</strong>
+          | <span class="fa fa-phone"><span class="tel"> {{responsavel.telefoneAnalista}}</span> </span>
+        </p>
 
-      <p class="text-center text-dados p-5">Poderá entrar em contacto com a Gestlifes
+        <p class="text-center text-dados p-5">Poderá entrar em contacto com a Gestlifes
           através do nosso numero geral:<span class="phone"> (+351) 220 931 950</span> no horario 9h30 ás 19h00.
-      </p>
+        </p>
+      </div>
     </div>
+
+
+
   </div>
-
-
-
-</div>
