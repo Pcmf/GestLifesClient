@@ -15,6 +15,7 @@ export class ComprovativosComponent implements OnInit {
   private doc: any = [];
   private filename: string;
   private obj: any = {};
+
   constructor(private dataService: DataService, private route: Router) {
     this.loadDados();
   }
@@ -59,7 +60,10 @@ export class ComprovativosComponent implements OnInit {
           console.log(resp);
           this.erro = '';
           this.loaded = false;
-          this.loadDados();
+          setTimeout(() => {
+            this.loadDados();
+            // this.route.navigate(['/']);
+          }, 1000);
       });
   }
 
@@ -67,9 +71,7 @@ export class ComprovativosComponent implements OnInit {
     this.dataService.getData('cltcomp/' + this.dataService.getLead()).subscribe(
       resp => {
         this.docList = resp;
-        setTimeout(() => {
-          this.route.navigate(['/']);
-        }, 1000);
+
       }
     );
   }

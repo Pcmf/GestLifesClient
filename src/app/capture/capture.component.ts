@@ -10,6 +10,7 @@ import { DataService } from '../data.service';
   styleUrls: ['./capture.component.css']
 })
 export class CaptureComponent implements OnInit {
+  [x: string]: any;
   public camera = false;
   public file = false;
   public docPedido: any = {};
@@ -133,12 +134,13 @@ export class CaptureComponent implements OnInit {
   handleInputChange(e, doc) {
     this.doc = doc;
     const file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
-
+    this.filetype = (file.type).substr((file.type).indexOf('/') + 1);
     this.filename = file.name;
     const pattern = /pdf-*/;
+    const pattern2 = /image-*/;
     const reader = new FileReader();
-    if (!file.type.match(pattern)) {
-      this.erro = 'Formato inválido. O ficheiro tem de ser PDF!';
+    if (!file.type.match(pattern) && !file.type.match(pattern2)) {
+       this.erro = 'Formato inválido. O ficheiro tem de ser PDF ou JPG!';
       // return;
     } else if ( file.size > 4000000 ) {
       this.erro = 'Ficheiro demasiado grande. Tem que ser inferior a 4Mb';
@@ -152,8 +154,10 @@ export class CaptureComponent implements OnInit {
 
   }
   _handleReaderLoaded(e) {
+    console.log(this.filetype);
     const reader = e.target;
-    this.obj = {'lead': this.docPedido.lead, 'doc': this.docPedido, 'nomeFx': this.filename, 'fxBase64': reader.result};
+    this.obj = {'lead': this.docPedido.lead, 'doc': this.docPedido, 'nomeFx': this.filename, 'fxBase64': reader.result,
+    'type': this.filetype };
     this.loaded = true;
   }
 

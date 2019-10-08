@@ -13,7 +13,7 @@
         </div>
         <!--Input File-->
         <div class="col-12 col-md-4">
-        <input *ngIf="!camera" class="btn btn-outline-success" name="docToUpload" type="file" accept="pdf/*" ngModel
+        <input *ngIf="!camera" class="btn btn-outline-success" name="docToUpload" type="file" accept="application/pdf, image/jpeg, image/png" ngModel
           (change)="handleInputChange($event, docSelected )" (click)="selectFile()" />
       </div>
       <div class="col-12 col-md-4" *ngIf="!file">
@@ -43,7 +43,7 @@
       (initError)="handleInitError($event)">
     </webcam>
   </div>
-
+  <!-- Confirmação de captura de imagem -->
   <div class="snapshot" *ngIf="webcamImage && camera">
     <div class="d-flex justify-content-center">
       <button class="btn btn-outline-success" (click)="confirmaAnexarFoto()"><i class="fa fa-check"
