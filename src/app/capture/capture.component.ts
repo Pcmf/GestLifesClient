@@ -154,7 +154,6 @@ export class CaptureComponent implements OnInit {
 
   }
   _handleReaderLoaded(e) {
-    console.log(this.filetype);
     const reader = e.target;
     this.obj = {'lead': this.docPedido.lead, 'doc': this.docPedido, 'nomeFx': this.filename, 'fxBase64': reader.result,
     'type': this.filetype };

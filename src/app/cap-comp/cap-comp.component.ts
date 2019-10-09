@@ -39,6 +39,7 @@ export class CapCompComponent implements OnInit {
   private doc: any = [];
   private filename: string;
   private obj: any = {};
+  filetype: any;
 
   constructor(private route: ActivatedRoute, private dataService: DataService, private router: Router) {
     this.route.queryParamMap.subscribe(
@@ -46,6 +47,7 @@ export class CapCompComponent implements OnInit {
         /* console.log('Parametro doc: ' + params.get('lead') + params.get('linha')); */
         this.dataService.getData('cltcomp/' + params.get('lead') + '/' + params.get('linha') ).subscribe(
           resp => {
+            console.log('Reps: ' + resp);
             this.docPedido = resp[0];
           }
         );
@@ -139,7 +141,7 @@ export class CapCompComponent implements OnInit {
   handleInputChange(e, doc) {
     this.doc = doc;
     const file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
-
+    this.filetype = (file.type).substr((file.type).indexOf('/') + 1);
     this.filename = file.name;
     const pattern = /pdf-*/;
     const reader = new FileReader();
@@ -159,19 +161,19 @@ export class CapCompComponent implements OnInit {
   }
   _handleReaderLoaded(e) {
     const reader = e.target;
-    this.obj = {'lead': this.docPedido.lead, 'doc': this.docPedido, 'nomeFx': this.filename, 'fxBase64': reader.result};
+    this.obj = {'lead': this.docPedido.lead, 'doc': this.docPedido, 'nomeFx': this.filename, 'fxBase64': reader.result,
+    'tipodoc': this.filetype };
     this.loaded = true;
   }
 
   confirmaAnexar () {
-    this.dataService.saveData('cltdocs', this.obj)
+    this.dataService.saveData('cltcomp', this.obj)
       .subscribe( resp => {
-        if (resp) {
-          console.log(resp);
           this.erro = '';
           this.loaded = false;
-          window.history.back();
-        }
+          setTimeout(() => {
+            this.router.navigate(['/comp']);
+          }, 1000);
       });
   }
 }

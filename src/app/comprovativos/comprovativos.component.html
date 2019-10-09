@@ -1,7 +1,4 @@
 <div class="header d-flex justify-content-end align-items-center">
-  <!--     <div class="text-header mr-5">
-      <h2 class="text-center d-none d-md-flex">Documentação Necessária</h2>
-    </div> -->
 </div>
 
 <div class="container">
@@ -36,33 +33,6 @@
 
   </div>
   <div class="text-center mt-3">
-    <button class="btn btn-outline-warning" onclick="window.history.back()">Voltar</button>
+    <button class="btn btn-outline-warning" (click)="back()">Voltar</button>
   </div>
 </div>
-
-<!-- Modal -->
-<!--  <div class="modal fade" id="anexarModal" tabindex="-1" role="dialog" aria-labelledby="anexar" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document" >
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Anexar Comprovativo</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <h6 class="text-info">{{docSelected.instituicao}} - {{docSelected.tipo}} - {{docSelected.montante}}€ </h6>
-              <p>Instruções:</p>
-              <p><small>Deverá selecionar um documento no formato PDF e que tenha um tamanho inferior a 4Mbytes. 
-                Caso não tenha o documento em PDF poderá usar o este <a href="https://smallpdf.com/pt" __target="blanck">link</a> para o converter, facilmente e sem custos.
-              </small></p>
-              <input name="docToUpload" type="file" accept="pdf/*" ngModel (change)="handleInputChange($event, docSelected )" />
-              <div class="alert alert-danger" *ngIf="erro"><small>{{erro}}</small></div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn btn-primary" [disabled]="erro || !loaded"  data-dismiss="modal" (click)="confirmaAnexar()">Confirmar</button>
-            </div>
-          </div>
-        </div>
-      </div> -->

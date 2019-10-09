@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../data.service';
+import { routerNgProbeToken } from '@angular/router/src/router_module';
 
 @Component({
   selector: 'app-comprovativos',
@@ -27,45 +28,6 @@ export class ComprovativosComponent implements OnInit {
     this.docSelected = doc;
   }
 
-  handleInputChange(e, doc) {
-    this.doc = doc;
-    const file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
-    this.filename = file.name;
-    const pattern = /pdf-*/;
-    const reader = new FileReader();
-    if (!file.type.match(pattern)) {
-      this.erro = 'Formato inválido. O ficheiro tem de ser PDF!';
-      // return;
-    } else if ( file.size > 4000000 ) {
-      this.erro = 'Ficheiro demasiado grande. Tem que ser inferior a 4Mb';
-      // return;
-    } else {
-      this.erro = '';
-    }
-
-    reader.onload = this._handleReaderLoaded.bind(this);
-    reader.readAsDataURL(file);
-
-  }
-  _handleReaderLoaded(e) {
-    const reader = e.target;
-    this.obj = {'lead': this.doc.lead, 'doc': this.doc, 'nomeFx': this.filename, 'fxBase64': reader.result};
-    this.loaded = true;
-    console.log(this.obj);
-  }
-
-  confirmaAnexar () {
-    this.dataService.saveData('cltcomp', this.obj)
-      .subscribe( resp => {
-          console.log(resp);
-          this.erro = '';
-          this.loaded = false;
-          setTimeout(() => {
-            this.loadDados();
-            // this.route.navigate(['/']);
-          }, 1000);
-      });
-  }
 
   loadDados () {
     this.dataService.getData('cltcomp/' + this.dataService.getLead()).subscribe(
@@ -88,5 +50,8 @@ export class ComprovativosComponent implements OnInit {
     );
   }
 
+  back() {
+    this.route.navigate(['/']);
+  }
 
 }
