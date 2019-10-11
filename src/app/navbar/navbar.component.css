@@ -16,7 +16,18 @@
     /* the rest of your styling */
 }
 
+
+
+a:hover{
+    transition-property: all;
+    transition-duration: 0.25s;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0s;
+    color: blue;
+    cursor: pointer;
+}
+
 a{
-    color: black;
+    color: gray;
     text-decoration: none;
 }

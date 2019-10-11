@@ -3,8 +3,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    height: 45vh;
-    color: yellow;
+    height: 50vh;
     text-shadow: 1px 1px 1px;
 }
 
@@ -14,8 +13,4 @@
     align-items: center;
 }
 
-.card{
-    
-
-}
 

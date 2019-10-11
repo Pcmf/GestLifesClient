@@ -1,5 +1,5 @@
 <nav *ngIf="isLoggedIn()" class="navbar navbar-expand-lg navbar-inner">
-  <a class="navbar-brand" (click)="redirectTo()">
+  <a class="navbar-brand" (click)="redirectTo()" >
     <img src='./assets/img/logo_email_sm.png' style="height: 25px" alt="Gestlifes" />
   </a>
   
@@ -14,22 +14,18 @@
     <ul class="navbar-nav mr-auto" *ngIf="isLoggedIn()">
       <li class="nav-item active"> 
         <a class="nav-link small " routerLink="/form" routerLinkActive="active current">
-          <!-- <i class="fa fa-briefcase" aria-hidden="true"></i>  -->
           Processo</a>
       </li>
       <li class="nav-item">
         <a class="nav-link small " routerLink="/docs" routerLinkActive="active current">
-          <!-- <i class="fa fa-file" aria-hidden="true"></i>  -->
           Documentação</a>
       </li>
       <li class="nav-item">
         <a class="nav-link small " routerLink="/cc" routerLinkActive="active current">
-          <!-- <i class="fa fa-cc" aria-hidden="true"></i> -->
            Cartão de Crédito</a>
       </li>
       <li class="nav-item">
         <a class="nav-link small " routerLink="/faq" routerLinkActive="active current">
-          <!-- <i class="fa fa-question" aria-hidden="true"></i> -->
            FAQs</a>
       </li>
     </ul>

@@ -1,9 +1,9 @@
-<div class="header p-5 mb-3"></div>
+<div class="header p-5 mb-5"></div>
 
 <div class="container">
 
 
-  <div class="card w-75 h-50 mb-3 shadow rounded text-center">
+  <div class="card w-75 h-50 mb-5 shadow rounded text-center">
     <!-- Dados do processo -->
     <div class="card-header">
       <a routerLink="/form" style="color: #000b85; text-decoration: none">DADOS DO SEU PROCESSO</a>
@@ -51,7 +51,7 @@
   </div>
 
   <!-- Simulação de Credito-->
-  <div class="card w-75 h-50 mb-3 shadow rounded text-center"
+  <div class="card w-75 h-50 mb-5 shadow rounded text-center"
     *ngIf="dados.sts!=16 && dados.sts!=17 && dados.sts!=23 && dados.sts!=24">
     <div class="card-header">
       <a routerLink="/form2" style="color: #000b85; text-decoration: none">SIMULAÇÃO DO CRÉDITO</a>
@@ -71,7 +71,7 @@
     </div>
   </div>
   <!--AProvado ou Financiado-->
-  <div class="card w-75 h-50 m-1 text-center" *ngIf=" dados.sts==16 || dados.sts==17 || dados.sts==23 ||
+  <div class="card w-75 h-50 mb-5 shadow rounded text-center" *ngIf=" dados.sts==16 || dados.sts==17 || dados.sts==23 ||
     dados.sts==24">
     <div class="card-header">
       <a routerLink="/form2" style="color: #000b85; text-decoration: none">DADOS DO CRÉDITO</a>
@@ -89,7 +89,7 @@
   </div>
 
   <!-- Responsaveis  pelo processo-->
-  <div class=" card w-75 h-50 mb-3 shadow rounded text-center">
+  <div class=" card w-75 h-50 mb-5 shadow rounded text-center">
       <div class="card-header">
         <span style="color: #000b85;">RESPONSAVEIS</span>
       </div>
