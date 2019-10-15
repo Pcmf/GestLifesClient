@@ -25,13 +25,13 @@ export class ShowDocComponent implements OnInit {
           (resp: any) => {
             const document = resp[0];
             this.fxNome = document.nomedoc;
+            const fx64 = (document.fx64).replace(/[^\x20-\x7E]/gmi, '');
             if (document.tipo == 'pdf') {
-              this.imagePath = this._sanitizer.bypassSecurityTrustResourceUrl('data:application/pdf;base64,' + document.fx64);
+              this.imagePath = this._sanitizer.bypassSecurityTrustResourceUrl('data:application/pdf;base64,' + fx64 );
             } else if (document.tipo == 'jpg') {
               this.imagePath = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + document.fx64);
             } else if (document.tipo == 'png') {
               this.imagePath = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,' + document.fx64);
-
             }
           }
         );

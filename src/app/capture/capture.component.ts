@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Observable, Subject} from 'rxjs';
-import {WebcamImage, WebcamInitError, WebcamUtil} from 'ngx-webcam';
+import { Observable, Subject } from 'rxjs';
+import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../data.service';
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 @Component({
   selector: 'app-capture',
@@ -21,8 +22,8 @@ export class CaptureComponent implements OnInit {
   public multipleWebcamsAvailable = false;
   public deviceId: string;
   public videoOptions: MediaTrackConstraints = {
-     width: {ideal: 1024},
-     height: {ideal: 576}
+    width: { ideal: 1024 },
+    height: { ideal: 576 }
   };
   public errors: WebcamInitError[] = [];
 
@@ -32,7 +33,7 @@ export class CaptureComponent implements OnInit {
   // webcam snapshot trigger
   private trigger: Subject<void> = new Subject<void>();
   // switch to next / previous / specific webcam; true/false: forward/backwards, string: deviceId
-  private nextWebcam: Subject<boolean|string> = new Subject<boolean|string>();
+  private nextWebcam: Subject<boolean | string> = new Subject<boolean | string>();
 
   public docSelected: any = {};
   public erro = '';
@@ -40,18 +41,24 @@ export class CaptureComponent implements OnInit {
   private doc: any = [];
   private filename: string;
   private obj: any = {};
+  public showSpiner: boolean;
 
-  constructor(private route: ActivatedRoute, private dataService: DataService, private router: Router) {
+  constructor(private route: ActivatedRoute,
+    private dataService: DataService,
+    private router: Router,
+    private imageCompress: NgxImageCompressService) {
+    this.showSpiner = true;
     this.route.queryParamMap.subscribe(
       params => {
-        this.dataService.getData('cltdocped/' + params.get('lead') + '/' + params.get('linha') ).subscribe(
+        this.dataService.getData('cltdocped/' + params.get('lead') + '/' + params.get('linha')).subscribe(
           resp => {
             this.docPedido = resp[0];
+            this.showSpiner = false;
           }
         );
       }
     );
-   }
+  }
 
 
   public ngOnInit(): void {
@@ -83,7 +90,7 @@ export class CaptureComponent implements OnInit {
     this.errors.push(error);
   }
 
-  public showNextWebcam(directionOrDeviceId: boolean|string): void {
+  public showNextWebcam(directionOrDeviceId: boolean | string): void {
     // true => move forward through devices
     // false => move backwards through devices
     // string => move to device with given deviceId
@@ -102,32 +109,37 @@ export class CaptureComponent implements OnInit {
     return this.trigger.asObservable();
   }
 
-  public get nextWebcamObservable(): Observable<boolean|string> {
+  public get nextWebcamObservable(): Observable<boolean | string> {
     return this.nextWebcam.asObservable();
   }
 
-  public confirmaAnexarFoto () {
-    const obj = { 'doc': this.docPedido, 'imagem': this.webcamImage.imageAsDataUrl};
-    this.dataService.saveData('cltupimg', obj).subscribe(
+  public confirmaAnexarFoto() {
+    this.showSpiner = true;
+    this.imageCompress.compressFile(this.webcamImage.imageAsDataUrl, -2, 50, 80).then(
       resp => {
-        this.router.navigate(['/docs']);
-      }
-    );
+        const obj = { 'doc': this.docPedido, 'imagem': resp };
+        this.dataService.saveData('cltupimg', obj).subscribe(
+          res => {
+            this.showSpiner = false;
+            this.router.navigate(['/docs']);
+          }
+        );
+      });
   }
 
-  public tentarNovamente () {
+  public tentarNovamente() {
     this.webcamImage = null;
     this.camera = true;
     this.file = false;
   }
-  public cancelar () {
+  public cancelar() {
     this.webcamImage = null;
     this.camera = false;
     this.file = false;
     this.erro = '';
   }
 
-  anexarDoc (doc) {
+  anexarDoc(doc) {
     this.docSelected = doc;
   }
 
@@ -140,10 +152,13 @@ export class CaptureComponent implements OnInit {
     const pattern2 = /image-*/;
     const reader = new FileReader();
     if (!file.type.match(pattern) && !file.type.match(pattern2)) {
-       this.erro = 'Formato inválido. O ficheiro tem de ser PDF ou JPG!';
+      this.erro = 'Formato inválido. O ficheiro tem de ser PDF, JPG ou PNG!';
       // return;
-    } else if ( file.size > 4000000 ) {
-      this.erro = 'Ficheiro demasiado grande. Tem que ser inferior a 4Mb';
+    } else if (file.type.match(pattern) && file.size > 4000000) {
+      this.erro = 'Ficheiro PDF demasiado grande. Tem que ser inferior a 4Mb';
+      // return;
+    } else if (file.type.match(pattern2) && file.size > 6000000) {
+      this.erro = 'Ficheiro demasiado grande. Tem que ser inferior a 6Mb';
       // return;
     } else {
       this.erro = '';
@@ -155,24 +170,41 @@ export class CaptureComponent implements OnInit {
   }
   _handleReaderLoaded(e) {
     const reader = e.target;
-    this.obj = {'lead': this.docPedido.lead, 'doc': this.docPedido, 'nomeFx': this.filename, 'fxBase64': reader.result,
-    'type': this.filetype };
-    this.loaded = true;
+    if (this.filetype != 'pdf') {
+      this.imageCompress.compressFile(reader.result, -2, 50, 80).then(
+        resp => {
+          this.obj = {
+            'lead': this.docPedido.lead, 'doc': this.docPedido, 'nomeFx': this.filename, 'fxBase64': resp,
+            'type': this.filetype
+          };
+          this.loaded = true;
+        }
+      );
+    } else {
+      this.obj = {
+        'lead': this.docPedido.lead, 'doc': this.docPedido, 'nomeFx': this.filename, 'fxBase64': reader.result,
+        'type': this.filetype
+      };
+      this.loaded = true;
+    }
   }
 
-  confirmaAnexar () {
+  confirmaAnexar() {
+    this.showSpiner = true;
     this.dataService.saveData('cltdocs', this.obj)
-      .subscribe( resp => {
+      .subscribe(resp => {
         console.log('Confirma anexar:' + resp);
-          this.erro = '';
-          this.loaded = false;
-          setTimeout(() => {
-            this.router.navigate(['/docs']);
-          }, 1000);
+        this.erro = '';
+        this.loaded = false;
+        setTimeout(() => {
+          this.showSpiner = false;
+          this.router.navigate(['/docs']);
+        }, 1000);
       });
   }
 
   back() {
     window.history.back();
   }
+
 }

@@ -13,71 +13,78 @@
         </div>
         <!--Input File-->
         <div class="col-12 col-md-4">
-        <input *ngIf="!camera" class="btn btn-outline-success" name="docToUpload" type="file" accept="application/pdf, image/jpeg, image/png" ngModel
-          (change)="handleInputChange($event, docSelected )" (click)="selectFile()" />
+          <input *ngIf="!camera" class="btn btn-outline-success" name="docToUpload" type="file"
+            accept="application/pdf, image/jpeg, image/png" ngModel (change)="handleInputChange($event, docSelected )"
+            (click)="selectFile()" />
+        </div>
+        <div class="col-12 col-md-4" *ngIf="!file">
+          <button class="btn btn-warning" (click)="back()">Cancelar</button>
+        </div>
       </div>
-      <div class="col-12 col-md-4" *ngIf="!file">
-        <button class="btn btn-warning" (click)="back()">Cancelar</button>
+      <!-- butões de cancelar ou confirmar documento -->
+      <div class="sec1" *ngIf="file">
+        <div class="alert alert-danger" *ngIf="erro"><small>{{erro}}</small></div>
+        <div class="">
+          <button type="button" class="btn btn-warning" (click)="cancelar()">Cancelar</button>
+          <button type="button" class="btn btn-primary" [disabled]="erro || !loaded"
+            (click)="confirmaAnexar()">Confirmar</button>
+        </div>
       </div>
     </div>
-    <!-- butões de cancelar ou confirmar documento -->
-    <div class="sec1" *ngIf="file">
-      <div class="alert alert-danger" *ngIf="erro"><small>{{erro}}</small></div>
-      <div class="">
-        <button type="button" class="btn btn-warning" (click)="cancelar()">Cancelar</button>
-        <button type="button" class="btn btn-primary" [disabled]="erro || !loaded"
-          (click)="confirmaAnexar()">Confirmar</button>
-      </div>
-    </div>
-  </div>
-  <!--  Visualizador da captura -->
-  <div class="sec2" *ngIf="!webcamImage && camera">
-    <button class="btn btn-outline-primary btn-block" (click)="triggerSnapshot();"><i class="fa fa-camera"
-        aria-hidden="true"></i> Tirar Foto</button>
-    <!-- Trocar de camera -->
-    <button *ngIf="!file && camera && multipleWebcamsAvailable" class="btn btn-outline-warning"
-      (click)="toggleWebcam()"><i class="fa fa-camera-alt" aria-hidden="true"></i> Mudar Camera</button>
+    <!--  Visualizador da captura -->
+    <div class="sec2" *ngIf="!webcamImage && camera">
+      <button class="btn btn-outline-primary btn-block" (click)="triggerSnapshot();"><i class="fa fa-camera"
+          aria-hidden="true"></i> Tirar Foto</button>
+      <!-- Trocar de camera -->
+      <button *ngIf="!file && camera && multipleWebcamsAvailable" class="btn btn-outline-warning"
+        (click)="toggleWebcam()"><i class="fa fa-camera-alt" aria-hidden="true"></i> Mudar Camera</button>
 
-    <webcam *ngIf="showWebcam" [height]="600" [width]="400" [trigger]="triggerObservable"
-      (imageCapture)="handleImage($event)" [videoOptions]="videoOptions" [imageQuality]="1"
-      (initError)="handleInitError($event)">
-    </webcam>
-  </div>
-  <!-- Confirmação de captura de imagem -->
-  <div class="snapshot" *ngIf="webcamImage && camera">
-    <div class="d-flex justify-content-center">
-      <button class="btn btn-outline-success" (click)="confirmaAnexarFoto()"><i class="fa fa-check"
-          aria-hidden="true"></i> Aceitar</button>
-      <button class="btn btn-outline-info" (click)="tentarNovamente()"><i class="fa fa-camera" aria-hidden="true"></i>
-        Novamente</button>
-      <button class="btn btn-outline-warning" (click)="cancelar()"><i class="fa fa-times" aria-hidden="true"></i>
-        Cancelar</button>
+      <webcam *ngIf="showWebcam" [height]="600" [width]="400" [trigger]="triggerObservable"
+        (imageCapture)="handleImage($event)" [videoOptions]="videoOptions" [imageQuality]="1"
+        (initError)="handleInitError($event)">
+      </webcam>
     </div>
-    <img [src]="webcamImage.imageAsDataUrl" />
-  </div>
+    <!-- Confirmação de captura de imagem -->
+    <div class="snapshot" *ngIf="webcamImage && camera">
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-outline-success" (click)="confirmaAnexarFoto()"><i class="fa fa-check"
+            aria-hidden="true"></i> Aceitar</button>
+        <button class="btn btn-outline-info" (click)="tentarNovamente()"><i class="fa fa-camera" aria-hidden="true"></i>
+          Novamente</button>
+        <button class="btn btn-outline-warning" (click)="cancelar()"><i class="fa fa-times" aria-hidden="true"></i>
+          Cancelar</button>
+      </div>
+      <img [src]="webcamImage.imageAsDataUrl" />
+    </div>
 
-</div>
-<br /><br />
-<div class="jumbotron small">
-  <h6 class="text-uppercase text-center">Cuidados a ter com a documentação</h6>
-  <div class="pr-5 pl-5">
-    <p>De forma a que o seu pedido de crédito possa avançar rápidamente é necessário que a documentação nos chegue de
-      forma legível.</p>
-    <p>Geralmente quando esta é enviada em ficheiros PDF esse problema não se coloca.</p>
-    <p>Já nos casos das fotografias, com o telemovel, do documento é necessário ter alguns cuidados:</p>
-    <ul>
-      <li>A imagem deverá ser nitida, legível e incluir o documento na totalidade.</li>
-      <li>Sempre que possivél tire a fotografia com o telemovel na vertical a apanhar o documento completo.</li>
-      <li>Coloque o documento numa superfice direita, uma mesa por exemplo, e tente tirar a fotografia o mais
-        perpendicular possivél ao documento.</li>
-      <li>Tenha atenção á iluminação. Cuidado com os reflexos!</li>
-      <li>Verifique que ficou legível antes de aceitar. Repita se necessário.</li>
-      <li>Use uma foto para cada documento pedido. Pode usar mais que uma foto para o mesmo documento pedido. Por
-        exemplo no caso dos recibos de vencimento.</li>
-    </ul>
-    <p>Quando os documentos não nos chegam em condições, não nos é possivél avançar para a analise do pedido de
-      crédito,
-      sendo necessário pedir documentos novamente, o que irá atrasar todo o processo.</p>
   </div>
-</div>
+  <br /><br />
+  <div class="jumbotron small">
+    <h6 class="text-uppercase text-center">Cuidados a ter com a documentação</h6>
+    <div class="pr-5 pl-5">
+      <p>De forma a que o seu pedido de crédito possa avançar rápidamente é necessário que a documentação nos chegue de
+        forma legível.</p>
+      <p>Geralmente quando esta é enviada em ficheiros PDF esse problema não se coloca.</p>
+      <p>Já nos casos das fotografias, com o telemovel, do documento é necessário ter alguns cuidados:</p>
+      <ul>
+        <li>A imagem deverá ser nitida, legível e incluir o documento na totalidade.</li>
+        <li>Sempre que possivél tire a fotografia com o telemovel na vertical a apanhar o documento completo.</li>
+        <li>Coloque o documento numa superfice direita, uma mesa por exemplo, e tente tirar a fotografia o mais
+          perpendicular possivél ao documento.</li>
+        <li>Tenha atenção á iluminação. Cuidado com os reflexos!</li>
+        <li>Verifique que ficou legível antes de aceitar. Repita se necessário.</li>
+        <li>Use uma foto para cada documento pedido. Pode usar mais que uma foto para o mesmo documento pedido. Por
+          exemplo no caso dos recibos de vencimento.</li>
+      </ul>
+      <p>Quando os documentos não nos chegam em condições, não nos é possivél avançar para a analise do pedido de
+        crédito,
+        sendo necessário pedir documentos novamente, o que irá atrasar todo o processo.</p>
+    </div>
+  </div>
+  <!-- Spinner -->
+  <div *ngIf="showSpiner" class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
 </div>

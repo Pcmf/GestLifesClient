@@ -27,6 +27,7 @@ import { Form2Component } from './form2/form2.component';
 import { FooterComponent } from './footer/footer.component';
 import { CreditCardComponent } from './credit-card/credit-card.component';
 import { MenuComponent } from './menu/menu.component';
+import {NgxImageCompressService} from 'ngx-image-compress';
 
 @NgModule({
   declarations: [
@@ -75,8 +76,10 @@ import { MenuComponent } from './menu/menu.component';
       {path: '**', component: LoginComponent }
     ], {scrollPositionRestoration: 'enabled'})
   ],
- // providers: [DataService, AuthGuardService, {provide: APP_BASE_HREF, useValue: '/sisleads/GestLifesClient/'}],
-  providers: [DataService, AuthGuardService, {provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [DataService, AuthGuardService,
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
+    NgxImageCompressService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
