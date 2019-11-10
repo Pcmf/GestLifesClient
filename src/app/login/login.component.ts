@@ -72,6 +72,7 @@ export class LoginComponent {
         );
     }
   }
+
   getLeadInf(lead: number) {
     this.dataService.getData('lead/' + lead).subscribe(
       resp => {

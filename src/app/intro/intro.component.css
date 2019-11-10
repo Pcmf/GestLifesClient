@@ -1,7 +1,7 @@
 .main{
     display: flex;
     flex-direction: column;
-    /* height: 100vh; */
+     height: 75vh;
 
 }
 
@@ -10,7 +10,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    min-height: 25vh;
+    min-height: 55vh;
 }
 
 .header h2 {
