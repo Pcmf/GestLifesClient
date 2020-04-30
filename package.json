@@ -26,7 +26,7 @@
     "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
     "font-awesome": "^4.7.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "ngx-image-compress": "^8.0.3",
     "ngx-webcam": "^0.2.2",
     "popper.js": "^1.14.7",
